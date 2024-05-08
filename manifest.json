@@ -1,0 +1,20 @@
+{
+  "description": "Adds Neko's Settera addons to all https://www.geoguessr.com/vgp/ pages.",
+  "manifest_version": 2,
+  "name": "Neko's Settera Features Wizard",
+  "version": "1.0",
+  "permissions": [ "storage" ],
+  "homepage_url": "https://github.com/NekoXIII/SeterraAddon/tree/main",
+  "icons": { "512": "icons/seterra.png" },
+  "content_scripts": [
+    {
+      "matches": [ "https://www.geoguessr.com/vgp/*" ],
+      "js": [ "NekoSeterra.js" ]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "nekoseterra@uwu.com"
+    }
+  }
+}
