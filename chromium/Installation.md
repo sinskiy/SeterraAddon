@@ -7,7 +7,7 @@ Chromium installation instructions
 </h3>
 <hr>
 
-Download the latest Chromium release [`here`](https://github.com/NekoXIII/SeterraAddon/releases/latest)<br>	
+Download the latest Chromium release [`here`](https://github.com/NekoXIII/SeterraAddon/releases/latest) (NekoSeterraChromium.zip)<br>	
 Unzip the release so you have a normal folder instead of a zip.<br>
 Browse to your browser's Extensions page.<br>
 Toggle \"Developer mode\" on if this setting is turned off.<br>
