@@ -26,7 +26,8 @@ function createForm() {
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
             { id: 'showFlagCbxId', text: 'Show area flags', title: 'Shows or hides area flags.' },
             { id: 'showNamesCbxId', text: 'Show area names', title: 'Shows or hides area names.' },
-            { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' }
+            { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' },
+            { id: 'comicSansCbxId', text: 'Enable readable font', title: ':)' }
         ];
 
         checkboxes.forEach(({ id, text, title }, index) => {
@@ -586,6 +587,16 @@ function meow() {
                 remClickOn(false);
             }
         });
+        getData("comicSans").then(beans8 => {
+            if (beans8) {
+                document.getElementById("comicSansCbxId").checked = true;
+                readableFont(true);
+            }
+            else {
+                document.getElementById("comicSansCbxId").checked = false;
+                readableFont(false);
+            }
+        });
     }
     if (boldNamesOopsie) {
         getData("boldNames").then(beans9 => {
@@ -599,6 +610,15 @@ function meow() {
             }
         });
     }
+
+    getData("initialReload").then(beans9 => {
+        if (!beans9) {
+            browser.storage.local.set({
+                "initialReload": true
+            });
+            location.reload();
+        }
+    });
 }
 ///  Applies the user's stored settings. (executes functions)
 function setSettings() {
@@ -759,11 +779,39 @@ function setSettings() {
             remClickOn(false);
         }
     })
+
+    document.getElementById("comicSansCbxId").addEventListener("change", function () {
+        if (document.getElementById("comicSansCbxId").checked) {
+
+            browser.storage.local.set({
+                "comicSans": true
+            });
+            readableFont(true);
+        }
+        else {
+
+            browser.storage.local.set({
+                "comicSans": false
+            });
+            readableFont(false);
+        }
+    })
     remFooter();
 }
 
-function a(){
+function readableFont(bool) {
+    var textElements = document.querySelectorAll('*');
 
+    if (bool) {
+        textElements.forEach(function (element) {
+            element.style.fontFamily = 'comic sans ms';
+        });
+    }
+    else {
+        textElements.forEach(function (element) {
+            element.style.fontFamily = 'neo-sans';
+        });
+    }
 }
 
 setInitialData({
@@ -776,7 +824,10 @@ setInitialData({
     "boldNames": true,
     "showFlags": true,
     "showNames": true,
-    "removeClickOn": false
+    "removeClickOn": false,
+    "comicSans": false,
+    "initialReload": false,
+
 }).then(() => {
     console.log("Data saved successfully.");
 }).catch(error => {
@@ -787,156 +838,6 @@ setInitialData({
 var unset = true;
 var boldNamesOopsie = true;
 var labelColor = true;
-
-function setLabelColor() {
-    getData("darkMode").then(beans11 => {
-        var tooltipElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0];
-        if (tooltipElement) {
-            var rgbaColor = beans11 ? "rgba(24, 26, 27, 0.5)" : "rgba(255, 255, 255, 0.5)";
-            var textColor = beans11 ? "white" : "black";
-
-            var buttons = document.getElementsByClassName("button_label__ERkjz");
-            var borders = document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj");
-            var textElements = document.querySelectorAll(':not(a)');
-
-            if (beans11) {
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].style.color = "white";
-                }
-                for (var i = 0; i < borders.length; i++) {
-                    borders[i].style.border = ".0625rem solid white";
-                }
-                textElements.forEach(function (element) {
-                    element.style.color = 'white';
-                });
-                if (document.getElementsByClassName('game-area_gameArea__G2ABs')[0]) {
-                    document.getElementsByClassName('game-area_gameArea__G2ABs')[0].childNodes.forEach(function (element) {
-                        element.style.color = 'black';
-                    });
-                }
-                if (document.getElementById('nekoheaderid')) {
-                    document.getElementById('nekoheaderid').style.color = "#FF006E";
-                }
-
-                if (document.getElementById('versionid')) {
-                    document.getElementById('versionid').style.color = "#CC0058";
-                }
-
-                //if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
-                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontSize = "18px";
-                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.textShadow = "black 2px 1px";
-                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontFamily = "comic sans ms"
-                //}
-
-            }
-            else {
-                for (var i = 0; i < buttons.length; i++) {
-                    buttons[i].style.color = "black";
-                }
-                for (var i = 0; i < borders.length; i++) {
-                    borders[i].style.border = ".0625rem solid black";
-                }
-                textElements.forEach(function (element) {
-                    element.style.color = 'black';
-                });
-                if (document.getElementsByClassName('game-area_gameArea__G2ABs')[0]) {
-                    document.getElementsByClassName('game-area_gameArea__G2ABs')[0].childNodes.forEach(function (element) {
-                        element.style.color = 'white';
-                    });
-                }
-                if (document.getElementById('nekoheaderid')) {
-                    document.getElementById('nekoheaderid').style.color = "#FF006E";
-                }
-
-                if (document.getElementById('versionid')) {
-                    document.getElementById('versionid').style.color = "#CC0058";
-                }
-
-                //if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
-                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontSize = "18px";
-                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.textShadow = "white 2px 1px";
-                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontFamily = "comic sans ms"
-                //}
-            }
-
-            tooltipElement.style.background = rgbaColor;
-
-            var spanElement = tooltipElement.querySelector('span');
-            var strongElement = spanElement ? spanElement.querySelector('strong') : null;
-
-            if (spanElement) {
-                spanElement.style.color = textColor;
-                if (strongElement) {
-                    strongElement.style.color = textColor;
-                }
-            }
-        }
-    });
-
-    getData("showTop10").then(beans12 => {
-        if (beans12) {
-            customTable(true);
-        }
-    });
-
-    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
-    }
-    getData("darkMode").then(beans0 => {
-        if (beans0) {
-            if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(231, 229, 228, 0.15)";
-            }            
-        }
-        else {
-            if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(24, 26, 27, 0.15)";
-            }
-        }
-    });
-
-    getData("showFlags").then(beans7 => {
-        if (beans7) {
-            flags(true);
-        }
-        else {
-            flags(false);
-        }
-    });
-
-    if (document.getElementsByClassName("game-container_content__VkRyQ")[0]) {
-        document.getElementsByClassName("game-container_content__VkRyQ")[0].style.maxWidth = "1133px";
-        document.getElementsByClassName("game-container_content__VkRyQ")[0].style.padding = "0 180px";
-    }
-
-    getData("removeClickOn").then(beans8 => {
-        if (beans8) {
-            document.getElementById("remClickOnCbxId").checked = true;
-            remClickOn(true);
-        }
-        else {
-            document.getElementById("remClickOnCbxId").checked = false;
-            remClickOn(false);
-        }
-    });
-
-    getData("showFlags").then(beans7 => {
-        if (beans7) {
-            flags(true);
-        }
-        else {
-            flags(false);
-        }
-    });
-    getData("showNames").then(beans8 => {
-        if (beans8) {
-            names(true);
-        }
-        else {
-            names(false);
-        }
-    });
-}
 
 /// createform => setSettings => remFooter => meow
 createForm();
