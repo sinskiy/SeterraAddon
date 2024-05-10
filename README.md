@@ -12,9 +12,8 @@ Extension overview
 A simple browser extension to visually enhance your Seterra experience.
 </p>	
 
-Now available as an extension for Firefox-based browsers <a href="https://addons.mozilla.org/en-GB/firefox/addon/neko-s-settera-features-wizard/" target="_blank">here</a>
-
-Also available for Chromium-based browsers, see installation instructions [`here`](./chromium/Installation.md)
+Now available as an extension for Firefox-based browsers <a href="https://addons.mozilla.org/en-GB/firefox/addon/neko-s-settera-features-wizard/" target="_blank">here</a><br>
+Also available for Chromium-based browsers, see installation instructions <a href="./chromium/Installation.md">here</a>
 </div>
 <div style="position: fixed; bottom: 0;">
 
