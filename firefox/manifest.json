@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": [ "https://www.geoguessr.com/vgp/*" ],
-      "js": [ "NekoSeterra.js" ]
+      "js": [ "NekoSeterraFirefox.js" ]
     }
   ],
   "browser_specific_settings": {

@@ -20,7 +20,7 @@ function createForm() {
             { id: 'darkModeCbxId', text: 'Enable dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
             { id: 'mapPaddingCbxId', text: 'Enable extra map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
-            { id: 'removeLeftPaddingCbxId', text: 'Remove left map padding', title: 'Removes the unused space that\'s present on the left side of the map, which centers the map.' },
+            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Removes the unused space that\'s present on the left side of the map, which centers the map.' },
             { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.\nONLY WORKS WHEN LOGGED IN' },
             { id: 'showCursorLabelCbxId', text: 'Show cursor label', title: 'Shows or hides the label that tracks the cursor.' },
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
@@ -57,7 +57,7 @@ function createForm() {
 
 
         const version = document.createElement("p");
-        version.textContent = "v1.3 - 10 May 2024";
+        version.textContent = "v1.4.1 - 10 May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
