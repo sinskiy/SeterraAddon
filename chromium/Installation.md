@@ -7,7 +7,7 @@ Chromium installation instructions
 </h3>
 <hr>
 
-Download the latest Chromium release [`here`](https://github.com/NekoXIII/SeterraAddon/releases/latest) (NekoSeterraChromium.zip)<br>	
+Download the latest Chromium release <a href="https://github.com/NekoXIII/SeterraAddon/releases/latest" target="_blank">here</a><br>
 Unzip the release so you have a normal folder instead of a zip.<br>
 Browse to your browser's Extensions page.<br>
 Toggle \"Developer mode\" on if this setting is turned off.<br>
@@ -18,7 +18,7 @@ Reload any opened Seterra page for the extension to take effect.<br><br>
 And that's you all set, happy Seterra-ing :3<br><br>
 <hr>
 
-If you run into any issues, feel free to make a github issue [`here`](https://github.com/NekoXIII/SeterraAddon/issues)<br>
+If you run into any issues, feel free to make a github issue <a href="https://github.com/NekoXIII/SeterraAddon/issues" target="_blank">here</a><br>
 </div>
 
 <div style="position: fixed; bottom: 0;">
