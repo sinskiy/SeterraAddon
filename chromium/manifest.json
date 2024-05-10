@@ -15,7 +15,7 @@
         "NekoSeterraChromium.js"
       ],
       "matches": [
-        "https://www.geoguessr.com/vgp/*"
+        "https://www.geoguessr.com/*"
       ]
     }
   ]

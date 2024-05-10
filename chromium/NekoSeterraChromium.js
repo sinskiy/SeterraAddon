@@ -20,8 +20,8 @@ function createForm() {
             { id: 'darkModeCbxId', text: 'Enable dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
             { id: 'mapPaddingCbxId', text: 'Enable extra map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
-            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\nOnly works when zoom is equal to or less than 100%.' },
-            { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.\nONLY WORKS WHEN LOGGED IN' },
+            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\n!!! DOES NOT WORK FOR ZOOM VALUES OVER 125%' },
+            { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.\n!!! ONLY WORKS WHEN LOGGED IN' },
             { id: 'showCursorLabelCbxId', text: 'Show cursor label', title: 'Shows or hides the label that tracks the cursor.' },
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
             { id: 'showFlagCbxId', text: 'Show area flags', title: 'Shows or hides area flags.' },
@@ -29,6 +29,26 @@ function createForm() {
             { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' },
             { id: 'comicSansCbxId', text: 'Enable readable font', title: ':)' }
         ];
+
+        // Create a style element
+        var style = document.createElement('style');
+
+        // Set the type attribute
+        style.setAttribute('type', 'text/css');
+
+        // Define the CSS rule to change the cursor for labels with the custom-label class
+        var css = '.neko-help-class:hover { cursor: pointer; }'; // Changed selector here
+
+        // Add the CSS rule to the style element
+        if (style.styleSheet) {
+            // For IE
+            style.styleSheet.cssText = css;
+        } else {
+            style.appendChild(document.createTextNode(css));
+        }
+
+        // Append the style element to the document's head
+        document.head.appendChild(style);
 
         checkboxes.forEach(({ id, text, title }, index) => {
             const checkbox = document.createElement('input');
@@ -38,10 +58,12 @@ function createForm() {
             const label = document.createElement('label');
             label.textContent = text;
             label.htmlFor = id;
+            
 
             const helpText = document.createElement('label');
             helpText.textContent = '?';
             helpText.title = title;
+            helpText.classList.add('neko-help-class'); // Add a class here
 
             checkbox.style.position = 'relative';
             label.style.position = 'relative';
@@ -55,7 +77,6 @@ function createForm() {
             nekoForm.appendChild(document.createElement('br'));
         });
 
-
         const version = document.createElement("p");
         version.textContent = "v1.4.2 - 10 May 2024";
         version.style.fontSize = "12px";
@@ -66,7 +87,6 @@ function createForm() {
 
         document.body.appendChild(nekoMain);
     }
-    setSettings();
 }
 ///  Custom highscore table positioning, uses the `unset` bool for looping, as it's not loaded instantaneously.
 function customTable(bool) {
@@ -74,7 +94,7 @@ function customTable(bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "760px";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "958px";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
             unset = false;
         }
@@ -115,12 +135,28 @@ function mapPadding(bool) {
         }
     }
 }
+
+function zoomFunc(amnt, px, zoom) {
+    if (zoom == amnt) {
+        if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
+            document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = px+"px";
+        }
+    }
+}
+
 ///  Removal of empty space next to map.
 function noLeftSpace(bool) {
     if (bool) {
-        if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
-            document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = "400px";
-        }
+
+        let zoom = window.devicePixelRatio.toFixed(1); // 100% = 1.0, 50% = 0.5
+
+        zoomFunc(0.5, 320, zoom) // 50%
+        zoomFunc(0.7, 338, zoom) // 67%
+        zoomFunc(0.8, 345, zoom) // 75 or 80%
+        zoomFunc(0.9, 350, zoom) // 90%
+        zoomFunc(1.0, 355, zoom) // 100%
+        zoomFunc(1.1, 360, zoom) // 110%
+        zoomFunc(1.3, 308, zoom) // 130%
     }
     else {
         if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
@@ -476,14 +512,16 @@ function getData(name) {
 }
 ///  Constant loop for page checks.
 function meow() {
-    if (window.location.pathname.substring(0, 4) != "/vgp") {
-        document.getElementById("NekoAddon").style.display = "none"
-    }
-    else {
+
+    if (window.location.pathname.substring(0, 4) == "/vgp") {
+        createForm();
         document.getElementById("NekoAddon").style.display = "block"
         var unset = true;
         var boldNamesOopsie = true;
         var labelColor = true;
+    }
+    else {
+        document.getElementById("NekoAddon").style.display = "none"
     }
 
     if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
@@ -841,4 +879,6 @@ var labelColor = true;
 
 /// createform => setSettings => remFooter => meow
 createForm();
+setSettings();
+
 setInterval(setSettings, 250);
