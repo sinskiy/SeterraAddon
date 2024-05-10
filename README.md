@@ -1,10 +1,23 @@
 <div align=center>
-	<h1> Neko's Seterra Features Wizard</h1>
-	<p>
-	A simple browser extension to visually enhance your Seterra experience.
-	</p>	
+<h1> 
+Neko's Seterra Features Wizard
+</h1>
+<img src="./icon.png" width="18%">
+<hr>
+<h3>
+Extension overview
+</h3>
+<hr>
+<p>
+A simple browser extension to visually enhance your Seterra experience.
+</p>	
 
-Now available for Firefox-based browsers [`here`](https://addons.mozilla.org/en-GB/firefox/addon/neko-s-settera-features-wizard/)!
+Now available for Firefox-based browsers [`here`](https://addons.mozilla.org/en-GB/firefox/addon/neko-s-settera-features-wizard/)
 
-Chromium version is in the works.
+Also available for Chromium-based browsers, see installation instructions [`here`](./chromium/Installation.md)
+</div>
+<div style="position: fixed; bottom: 0;">
+
+    
+Last updated ```10 May 2024```<br>
 </div>
