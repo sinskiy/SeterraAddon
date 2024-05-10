@@ -21,11 +21,12 @@ function createForm() {
             { id: 'mapPaddingCbxId', text: 'Enable extra map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
             { id: 'removeLeftPaddingCbxId', text: 'Remove left map padding', title: 'Removes the unused space that\'s present on the left side of the map, which centers the map.' },
-            { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.' },
+            { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.\nONLY WORKS WHEN LOGGED IN' },
             { id: 'showCursorLabelCbxId', text: 'Show cursor label', title: 'Shows or hides the label that tracks the cursor.' },
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
             { id: 'showFlagCbxId', text: 'Show area flags', title: 'Shows or hides area flags.' },
-            { id: 'showNamesCbxId', text: 'Show area names', title: 'Shows or hides area names.' }
+            { id: 'showNamesCbxId', text: 'Show area names', title: 'Shows or hides area names.' },
+            { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' }
         ];
 
         checkboxes.forEach(({ id, text, title }, index) => {
@@ -55,7 +56,7 @@ function createForm() {
 
 
         const version = document.createElement("p");
-        version.textContent = "v1.0.1 - 8 May 2024";
+        version.textContent = "v1.3 - 10 May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -64,6 +65,7 @@ function createForm() {
 
         document.body.appendChild(nekoMain);
     }
+    setSettings();
 }
 ///  Custom highscore table positioning, uses the `unset` bool for looping, as it's not loaded instantaneously.
 function customTable(bool) {
@@ -71,17 +73,38 @@ function customTable(bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "0";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "760px";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
             unset = false;
         }
     }
+}
+///
+function remClickOn(bool) {
+    if (bool) {
+        if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+          
+            if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span')) {
+                document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').childNodes[0].textContent = "";
+            }
+        }
+    }
+    else {
+        if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+
+            if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span')) {
+                document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').childNodes[0].textContent = "Click on ";
+            }
+        }
+    }
+
 }
 ///  Map bottom padding.
 function mapPadding(bool) {
     if (bool) {
         if (document.getElementsByClassName("extra-info_extraInfo__80Tci")) {
             let a = document.getElementsByClassName("extra-info_extraInfo__80Tci");
-            a[0].style.marginTop = "150px";
+            a[0].style.marginTop = "200px";
         }
     }
     else {
@@ -110,6 +133,7 @@ function remFooter() {
     if (document.getElementsByClassName("seterra_adFooter__4glju")[0]) {
         document.getElementsByClassName("seterra_adFooter__4glju")[0].remove();
     }
+    meow();
 }
 ///  Map reset function.
 function spaceKeyDownHandler(event) {
@@ -139,10 +163,6 @@ function darkMode() {
     textElements.forEach(function (element) {
         element.style.color = 'white';
     });
-
-    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
-    }
 
     if (document.getElementById('nekoheaderid')) {
         document.getElementById('nekoheaderid').style.color = "#FF006E";
@@ -186,32 +206,15 @@ function darkMode() {
         document.getElementsByClassName("game-container_sizeMedium__ZYDZN")[0].style.color = "#181A1B";
     }
 
-    if (document.getElementsByClassName("button_label__ERkjz")[0]) {
-        document.getElementsByClassName("button_label__ERkjz")[0].style.color = "white";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[1]) {
-        document.getElementsByClassName("button_label__ERkjz")[1].style.color = "white";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[2]) {
-        document.getElementsByClassName("button_label__ERkjz")[2].style.color = "white";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[3]) {
-        document.getElementsByClassName("button_label__ERkjz")[3].style.color = "white";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[4]) {
-        document.getElementsByClassName("button_label__ERkjz")[4].style.color = "white";
+    var buttons = document.getElementsByClassName("button_label__ERkjz");
+    var borders = document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj");
+
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].style.color = "white";
     }
 
-    if (document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[0]) {
-        document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[0].style.border = ".0625rem solid white";
-    }
-
-    if (document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[1]) {
-        document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[1].style.border = ".0625rem solid white";
-    }
-
-    if (document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[2]) {
-        document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[2].style.border = ".0625rem solid white";
+    for (var i = 0; i < borders.length; i++) {
+        borders[i].style.border = ".0625rem solid white";
     }
 
     let bgc = "#181A1B";
@@ -234,7 +237,7 @@ function darkMode() {
 
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
-        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.5)";
+        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
 
         var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
 
@@ -243,6 +246,10 @@ function darkMode() {
             labelColor = false;
         }
     }
+
+    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
+    }
 }
 ///  Toggle for light mode.
 function lightMode() {
@@ -250,10 +257,6 @@ function lightMode() {
     textElements.forEach(function (element) {
         element.style.color = 'black';
     });
-
-    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
-    }
 
     if (document.getElementById('nekoheaderid')) {
         document.getElementById('nekoheaderid').style.color = "#FF006E";
@@ -288,32 +291,15 @@ function lightMode() {
         }
     }
 
-    if (document.getElementsByClassName("button_label__ERkjz")[0]) {
-        document.getElementsByClassName("button_label__ERkjz")[0].style.color = "black";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[1]) {
-        document.getElementsByClassName("button_label__ERkjz")[1].style.color = "black";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[2]) {
-        document.getElementsByClassName("button_label__ERkjz")[2].style.color = "black";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[3]) {
-        document.getElementsByClassName("button_label__ERkjz")[3].style.color = "black";
-    }
-    if (document.getElementsByClassName("button_label__ERkjz")[4]) {
-        document.getElementsByClassName("button_label__ERkjz")[4].style.color = "black";
+    var buttons = document.getElementsByClassName("button_label__ERkjz");
+    var borders = document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj");
+
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].style.color = "black";
     }
 
-    if (document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[0]) {
-        document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[0].style.border = ".0625rem solid black";
-    }
-
-    if (document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[1]) {
-        document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[1].style.border = ".0625rem solid black";
-    }
-
-    if (document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[2]) {
-        document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[2].style.border = ".0625rem solid black";
+    for (var i = 0; i < borders.length; i++) {
+        borders[i].style.border = ".0625rem solid black";
     }
 
     if (document.getElementsByClassName("game-container_content__VkRyQ")[0]) {
@@ -334,7 +320,7 @@ function lightMode() {
 
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
-        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(255, 255, 255, 0.5)";
+        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(255, 255, 255, 0.75)";
 
         var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
 
@@ -342,6 +328,9 @@ function lightMode() {
             spanElement.style.color = "black";
             labelColor = false;
         }
+    }
+    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
     }
 }
 ///  Toggle cursor label visibility.
@@ -486,7 +475,6 @@ function getData(name) {
 }
 ///  Constant loop for page checks.
 function meow() {
-
     if (window.location.pathname.substring(0, 4) != "/vgp") {
         document.getElementById("NekoAddon").style.display = "none"
     }
@@ -588,6 +576,16 @@ function meow() {
                 names(false);
             }
         });
+        getData("removeClickOn").then(beans8 => {
+            if (beans8) {
+                document.getElementById("remClickOnCbxId").checked = true;
+                remClickOn(true);
+            }
+            else {
+                document.getElementById("remClickOnCbxId").checked = false;
+                remClickOn(false);
+            }
+        });
     }
     if (boldNamesOopsie) {
         getData("boldNames").then(beans9 => {
@@ -601,33 +599,6 @@ function meow() {
             }
         });
     }
-    var zoomPercentage = parseFloat(window.devicePixelRatio.toFixed(1));
-
-    if (zoomPercentage == 1.4){
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.marginTop = "826px";
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "36px";
-        document.getElementById("NekoAddon").style.left = "18px";
-    }
-    else if (zoomPercentage == 1.3){
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.marginTop = "827px";
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "54px";
-        document.getElementById("NekoAddon").style.left = "36px";
-    }
-    else if (zoomPercentage == 1.2){
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.marginTop = "828px";
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "80px";
-        document.getElementById("NekoAddon").style.left = "72px";
-    }   
-    else if (zoomPercentage == 1.1){
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.marginTop = "828px";
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "120px";
-        document.getElementById("NekoAddon").style.left = "104px";
-    }   
-    else if (zoomPercentage == 1.0){
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.marginTop = "954px";
-        document.getElementById("NekoAddon").style.left = "104px";
-    }
-
 }
 ///  Applies the user's stored settings. (executes functions)
 function setSettings() {
@@ -701,12 +672,12 @@ function setSettings() {
             });
         }
         else {
-            if (document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0") {
+			if (document.getElementsByClassName("highscore_table__oKrYg")[0]){
                 browser.storage.local.set({
                     "showTop10": false
                 });
                 location.reload();
-            }
+			}
         }
     })
 
@@ -771,6 +742,28 @@ function setSettings() {
             names(false);
         }
     })
+
+    document.getElementById("remClickOnCbxId").addEventListener("change", function () {
+        if (document.getElementById("remClickOnCbxId").checked) {
+
+            browser.storage.local.set({
+                "removeClickOn": true
+            });
+            remClickOn(true);
+        }
+        else {
+
+            browser.storage.local.set({
+                "removeClickOn": false
+            });
+            remClickOn(false);
+        }
+    })
+    remFooter();
+}
+
+function a(){
+
 }
 
 setInitialData({
@@ -782,7 +775,8 @@ setInitialData({
     "showCursorLabel": true,
     "boldNames": true,
     "showFlags": true,
-    "showNames": true
+    "showNames": true,
+    "removeClickOn": false
 }).then(() => {
     console.log("Data saved successfully.");
 }).catch(error => {
@@ -794,7 +788,156 @@ var unset = true;
 var boldNamesOopsie = true;
 var labelColor = true;
 
+function setLabelColor() {
+    getData("darkMode").then(beans11 => {
+        var tooltipElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0];
+        if (tooltipElement) {
+            var rgbaColor = beans11 ? "rgba(24, 26, 27, 0.5)" : "rgba(255, 255, 255, 0.5)";
+            var textColor = beans11 ? "white" : "black";
+
+            var buttons = document.getElementsByClassName("button_label__ERkjz");
+            var borders = document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj");
+            var textElements = document.querySelectorAll(':not(a)');
+
+            if (beans11) {
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].style.color = "white";
+                }
+                for (var i = 0; i < borders.length; i++) {
+                    borders[i].style.border = ".0625rem solid white";
+                }
+                textElements.forEach(function (element) {
+                    element.style.color = 'white';
+                });
+                if (document.getElementsByClassName('game-area_gameArea__G2ABs')[0]) {
+                    document.getElementsByClassName('game-area_gameArea__G2ABs')[0].childNodes.forEach(function (element) {
+                        element.style.color = 'black';
+                    });
+                }
+                if (document.getElementById('nekoheaderid')) {
+                    document.getElementById('nekoheaderid').style.color = "#FF006E";
+                }
+
+                if (document.getElementById('versionid')) {
+                    document.getElementById('versionid').style.color = "#CC0058";
+                }
+
+                //if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontSize = "18px";
+                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.textShadow = "black 2px 1px";
+                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontFamily = "comic sans ms"
+                //}
+
+            }
+            else {
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].style.color = "black";
+                }
+                for (var i = 0; i < borders.length; i++) {
+                    borders[i].style.border = ".0625rem solid black";
+                }
+                textElements.forEach(function (element) {
+                    element.style.color = 'black';
+                });
+                if (document.getElementsByClassName('game-area_gameArea__G2ABs')[0]) {
+                    document.getElementsByClassName('game-area_gameArea__G2ABs')[0].childNodes.forEach(function (element) {
+                        element.style.color = 'white';
+                    });
+                }
+                if (document.getElementById('nekoheaderid')) {
+                    document.getElementById('nekoheaderid').style.color = "#FF006E";
+                }
+
+                if (document.getElementById('versionid')) {
+                    document.getElementById('versionid').style.color = "#CC0058";
+                }
+
+                //if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontSize = "18px";
+                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.textShadow = "white 2px 1px";
+                //    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.fontFamily = "comic sans ms"
+                //}
+            }
+
+            tooltipElement.style.background = rgbaColor;
+
+            var spanElement = tooltipElement.querySelector('span');
+            var strongElement = spanElement ? spanElement.querySelector('strong') : null;
+
+            if (spanElement) {
+                spanElement.style.color = textColor;
+                if (strongElement) {
+                    strongElement.style.color = textColor;
+                }
+            }
+        }
+    });
+
+    getData("showTop10").then(beans12 => {
+        if (beans12) {
+            customTable(true);
+        }
+    });
+
+    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
+    }
+    getData("darkMode").then(beans0 => {
+        if (beans0) {
+            if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
+                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(231, 229, 228, 0.15)";
+            }            
+        }
+        else {
+            if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
+                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(24, 26, 27, 0.15)";
+            }
+        }
+    });
+
+    getData("showFlags").then(beans7 => {
+        if (beans7) {
+            flags(true);
+        }
+        else {
+            flags(false);
+        }
+    });
+
+    if (document.getElementsByClassName("game-container_content__VkRyQ")[0]) {
+        document.getElementsByClassName("game-container_content__VkRyQ")[0].style.maxWidth = "1133px";
+        document.getElementsByClassName("game-container_content__VkRyQ")[0].style.padding = "0 180px";
+    }
+
+    getData("removeClickOn").then(beans8 => {
+        if (beans8) {
+            document.getElementById("remClickOnCbxId").checked = true;
+            remClickOn(true);
+        }
+        else {
+            document.getElementById("remClickOnCbxId").checked = false;
+            remClickOn(false);
+        }
+    });
+
+    getData("showFlags").then(beans7 => {
+        if (beans7) {
+            flags(true);
+        }
+        else {
+            flags(false);
+        }
+    });
+    getData("showNames").then(beans8 => {
+        if (beans8) {
+            names(true);
+        }
+        else {
+            names(false);
+        }
+    });
+}
+
+/// createform => setSettings => remFooter => meow
 createForm();
-setInterval(meow, 250);
-setSettings();
-remFooter();
+setInterval(setSettings, 250);
