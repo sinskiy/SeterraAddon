@@ -78,7 +78,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.4.2 - 10 May 2024";
+        version.textContent = "v1.5 - 11 May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -660,6 +660,11 @@ function meow() {
 }
 ///  Applies the user's stored settings. (executes functions)
 function setSettings() {
+
+    if (window.find("Uh oh! Got lost on your way?", true)) {
+        location.reload();
+    }
+
     document.getElementById("darkModeCbxId").addEventListener("change", function () {
         if (document.getElementById("darkModeCbxId").checked) {
 
