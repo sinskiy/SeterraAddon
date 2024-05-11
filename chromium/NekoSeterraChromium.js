@@ -63,7 +63,7 @@ function createForm() {
             const helpText = document.createElement('label');
             helpText.textContent = '?';
             helpText.title = title;
-            helpText.classList.add('neko-help-class'); // Add a class here
+            helpText.classList.add('neko-help-class');
 
             checkbox.style.position = 'relative';
             label.style.position = 'relative';
@@ -877,7 +877,7 @@ var unset = true;
 var boldNamesOopsie = true;
 var labelColor = true;
 
-/// createform => setSettings => remFooter => meow
+/// setSettings => remFooter => meow
 createForm();
 setSettings();
 
