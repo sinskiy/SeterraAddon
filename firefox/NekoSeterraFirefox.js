@@ -4,7 +4,7 @@ function createForm() {
         const nekoMain = document.createElement("div");
         nekoMain.id = "NekoAddon";
         nekoMain.style.position = "absolute";
-        nekoMain.style.top = "444px";
+        nekoMain.style.top = "582px";
         nekoMain.style.left = "18px";
 
         const nekoHeader = document.createElement("h2");
@@ -20,7 +20,7 @@ function createForm() {
             { id: 'darkModeCbxId', text: 'Enable dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
             { id: 'mapPaddingCbxId', text: 'Enable extra map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
-            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\n!!! DOES NOT WORK FOR ZOOM VALUES OVER 125%' },
+            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\n!!! DOES NOT WORK FOR ZOOM VALUES OVER 140%' },
             { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.\n!!! ONLY WORKS WHEN LOGGED IN' },
             { id: 'showCursorLabelCbxId', text: 'Show cursor label', title: 'Shows or hides the label that tracks the cursor.' },
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
@@ -78,7 +78,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.5.1 - 13 May 2024";
+        version.textContent = "v1.5.2 - 13 May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -94,7 +94,7 @@ function customTable(bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "760px";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "900px";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
             unset = false;
         }
@@ -135,12 +135,30 @@ function mapPadding(bool) {
         }
     }
 }
+function zoomFunc(amnt, px, zoom) {
+    if (zoom == amnt) {
+        if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
+            document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = px + "px";
+        }
+    }
+}
+
 ///  Removal of empty space next to map.
 function noLeftSpace(bool) {
     if (bool) {
-        if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
-            document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = "0px";
-        }
+
+        let zoom = window.devicePixelRatio.toFixed(1); // 100% = 1.0, 50% = 0.5
+
+        zoomFunc(0.5, 410, zoom) // 50%
+        zoomFunc(0.6, 410, zoom) // 50%
+        zoomFunc(0.7, 400, zoom) // 70%
+        zoomFunc(0.8, 400, zoom) // 80%
+        zoomFunc(0.9, 400, zoom) // 90%
+        zoomFunc(1.0, 400, zoom) // 100%
+        zoomFunc(1.1, 400, zoom) // 110%
+        zoomFunc(1.2, 380, zoom) // 120%
+        zoomFunc(1.3, 315, zoom) // 130%
+        zoomFunc(1.4, 267, zoom) // 140%
     }
     else {
         if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
@@ -149,6 +167,20 @@ function noLeftSpace(bool) {
     }
 
 }
+/////  Removal of empty space next to map.
+//function noLeftSpace(bool) {
+//    if (bool) {
+//        if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
+//            document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = "0px";
+//        }
+//    }
+//    else {
+//        if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
+//            document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = "160px";
+//        }
+//    }
+
+//}
 ///  Removes the bottom footer.
 function remFooter() {
     if (document.getElementsByClassName("seterra_adFooter__4glju")[0]) {
