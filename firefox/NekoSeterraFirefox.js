@@ -4,7 +4,7 @@ function createForm() {
         const nekoMain = document.createElement("div");
         nekoMain.id = "NekoAddon";
         nekoMain.style.position = "absolute";
-        nekoMain.style.top = "568px";
+        nekoMain.style.top = "444px";
         nekoMain.style.left = "18px";
 
         const nekoHeader = document.createElement("h2");
