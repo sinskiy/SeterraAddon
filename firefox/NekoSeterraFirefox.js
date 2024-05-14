@@ -78,7 +78,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.5.2 - 13 May 2024";
+        version.textContent = "v1.5.3 - 13 May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
