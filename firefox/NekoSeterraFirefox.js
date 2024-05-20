@@ -78,7 +78,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.5.3 - 13 May 2024";
+        version.textContent = "v1.6.0 - 20 May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -535,6 +535,13 @@ function meow() {
         var unset = true;
         var boldNamesOopsie = true;
         var labelColor = true;
+
+        if (window.location.pathname == "/vgp/3007") {
+            europecountries = true;
+        }
+        else {
+            europecountries = false;
+        }
     }
     else {
         document.getElementById("NekoAddon").style.display = "none"
@@ -663,6 +670,10 @@ function meow() {
                 boldNames(false);
             }
         });
+    }
+    if (europecountries && !toggled) {
+        toggled = true;
+        setInterval(compareBestTime, 2000);
     }
 
     getData("initialReload").then(beans9 => {
@@ -893,10 +904,65 @@ setInitialData({
     console.error("Error saving data:", error);
 });
 
+function findMS(value) {
+    const dotPosition = value.indexOf('.');
+
+    if (dotPosition === -1) {
+        return 0;
+    }
+
+    const substringAfterDot = value.substring(dotPosition + 1);
+
+    return substringAfterDot.length;
+}
+
+function compareBestTime() {
+    // Fetch the leaderboard data from the API
+    fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2')
+        .then(response => response.json())
+        .then(leaderboardData => {
+            const specificKey = "7893xeq8";
+            const pinValue = "qj77360q";
+
+            const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
+
+            let j = 1;
+            let num = 0;
+            
+
+            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+
+                let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                let pb = parseFloat(timeString.split(":")[1]);
+
+                for (let i = 0; i < filteredRuns.length; i++) {
+                    if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
+                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
+                    }
+                    else {
+                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                    }
+
+                    j++;                    
+
+                    if (num < 0 && !executed) {
+                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
+                        executed = true;
+                    }
+
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching leaderboard data:', error));
+}
+
 ///  Bools for existance checks.
 var unset = true;
 var boldNamesOopsie = true;
 var labelColor = true;
+var europecountries = false;
+var toggled = false;
+let executed = false;
 
 /// setSettings => remFooter => meow
 createForm();

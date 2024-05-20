@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Neko's Settera Features Wizard",
   "version": "1.5.3",
-  "permissions": [ "storage" ],
+  "permissions": [ "storage", "http://*/*", "https://*/*" ],
   "homepage_url": "https://github.com/NekoXIII/SeterraAddon/tree/main",
   "icons": { "512": "icons/seterra.png" },
   "content_scripts": [
