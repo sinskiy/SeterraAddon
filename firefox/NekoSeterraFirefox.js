@@ -945,9 +945,8 @@ function compareBestTime() {
 
                     j++;                    
 
-                    if (num < 0 && !executed) {
+                    if (num < 0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
                         document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
-                        executed = true;
                     }
 
                 }
@@ -962,7 +961,6 @@ var boldNamesOopsie = true;
 var labelColor = true;
 var europecountries = false;
 var toggled = false;
-let executed = false;
 
 /// setSettings => remFooter => meow
 createForm();
