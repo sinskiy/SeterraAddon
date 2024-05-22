@@ -77,7 +77,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.6.2 - 21 May 2024";
+        version.textContent = "v1.6.3 - 22nd of May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -193,7 +193,6 @@ function darkMode() {
 
     if(document.querySelectorAll("div.seterra_content__nGh5_")[0]){document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B'};
     if(document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#181A1B'};
-    if(document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]){document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)"};
     if(document.getElementsByClassName("game-header_wrapper__JDf24")[0]){document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(24, 26, 27, 0.5)"};
     document.querySelectorAll(':not(a)').forEach(function (element) {
         element.style.color = 'white';
@@ -230,7 +229,6 @@ function darkMode() {
 function lightMode() {
     if(document.querySelectorAll("div.seterra_content__nGh5_")[0]){document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#E7E5E4'};
     if(document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#E7E5E4'};
-    if(document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]){document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(231, 229, 228, 0.75)"};
     if(document.getElementsByClassName("game-header_wrapper__JDf24")[0]){document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(231, 229, 228, 0.75)"};    
     document.querySelectorAll(':not(a)').forEach(function (element) {
         element.style.color = 'black';
@@ -245,7 +243,7 @@ function lightMode() {
     });
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
-        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(255, 255, 255, 0.75)";
+        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(231, 229, 228, 0.75)"
 
         var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
 
@@ -409,18 +407,6 @@ function meow() {
     }
     else {
         document.getElementById("NekoAddon").style.display = "none"
-    }
-
-    if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
-        getData("darkMode").then(beans0 => {
-            if (beans0) {
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(24, 26, 27, 0.55)";
-            }
-            else {
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(255, 255, 255, 0.55)";
-            }
-        });
-
     }
 
     getData("darkMode").then(beans1 => {
@@ -653,6 +639,46 @@ function compareBestTime() {
         .catch(error => console.error('Error fetching leaderboard data:', error));
 }
 
+function ApplyColors() {
+    if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
+        getData("darkMode").then(beans0 => {
+            if (beans0) {
+                // end screen \/
+                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(24, 26, 27, 0.55)";
+                // cursor label \/
+                if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+
+                    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
+
+                    var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
+
+                    if (spanElement) {
+                        spanElement.style.color = "white";
+                        labelColor = false;
+                    }
+                }
+            }
+            else {
+                // end screen \/
+                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(255, 255, 255, 0.55)";
+                // cursor label \/
+                if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+
+                    document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(255, 255, 255, 0.75)";
+
+                    var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
+
+                    if (spanElement) {
+                        spanElement.style.color = "black";
+                        labelColor = false;
+                    }
+                }
+            }
+        });
+
+    }
+}
+
 ///  Bools for existance checks.
 var unset = true;
 var boldNamesOopsie = true;
@@ -666,3 +692,4 @@ createForm();
 setSettings();
 
 setInterval(setSettings, 500);
+setInterval(ApplyColors, 100);
