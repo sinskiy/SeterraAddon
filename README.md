@@ -12,11 +12,11 @@ Extension overview
 A simple browser extension to visually enhance your Seterra experience.
 </p>	
 
-Now available as an extension (v1.6.2) for Firefox-based browsers <a href="https://addons.mozilla.org/en-GB/firefox/addon/neko-s-settera-features-wizard/" target="_blank">here</a><br>
+Now available as an extension (v1.6.3) for Firefox-based browsers <a href="https://addons.mozilla.org/en-GB/firefox/addon/neko-s-settera-features-wizard/" target="_blank">here</a><br>
 Also available (v1.5.0) for Chromium-based browsers, see installation instructions <a href="./chromium/Installation.md">here</a>
 </div>
 <div style="position: fixed; bottom: 0;">
 
     
-Last updated ```14 May 2024```<br>
+Last updated ```22nd of May 2024```<br>
 </div>
