@@ -20,9 +20,3 @@ And that's you all set, happy Seterra-ing :3<br><br>
 
 If you run into any issues, feel free to make a github issue <a href="https://github.com/NekoXIII/SeterraAddon/issues" target="_blank">here</a><br>
 </div>
-
-<div style="position: fixed; bottom: 0;">
-
-    
-Last updated ```10 May 2024```<br>
-</div>

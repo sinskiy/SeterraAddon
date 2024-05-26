@@ -77,7 +77,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.6.3 - 22nd of May 2024";
+        version.textContent = "v1.6.4 - 26th of May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -398,12 +398,12 @@ function meow() {
         // var boldNamesOopsie = true;
         // var labelColor = true;
 
-        if (window.location.pathname == "/vgp/3007") {
-            europecountries = true; // src ranking bool
-        }
-        else {
-            europecountries = false;
-        }
+        //if (window.location.pathname == "/vgp/3007") {
+        //    europecountries = true; // src ranking bool
+        //}
+        //else {
+        //    europecountries = false;
+        //}
     }
     else {
         document.getElementById("NekoAddon").style.display = "none"
@@ -505,7 +505,7 @@ function meow() {
             boldNames(false);
         }
     });
-    if (europecountries && !toggled) {
+    if (src && !toggled) {
         toggled = true;
         setInterval(compareBestTime, 2000);
     }
@@ -601,42 +601,97 @@ function findMS(value) {
 }
 
 function compareBestTime() {
-    // Fetch the leaderboard data from the API
-    fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2')
-        .then(response => response.json())
-        .then(leaderboardData => {
-            const specificKey = "7893xeq8";
-            const pinValue = "qj77360q";
 
-            const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
+    // cheat sheet
+    // all levels: https://www.speedrun.com/api/v1/games/nd28p43d/levels
 
-            let j = 1;
-            let num = 0;
-            
+    // europe countries: https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2
+    // argentinia provinces (pin) : https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/ewpg2rkw/5dwvozlk
 
-            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+    if (window.location.pathname == "/vgp/3007") { // eur countr
+        // Fetch the leaderboard data from the API
+        fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2')
+            .then(response => response.json())
+            .then(leaderboardData => {
+                const specificKey = "7893xeq8";
+                const pinValue = "qj77360q";
 
-                let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                let pb = parseFloat(timeString.split(":")[1]);
+                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
 
-                for (let i = 0; i < filteredRuns.length; i++) {
-                    if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
-                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
+                let j = 1;
+                let num = 0;
+
+
+                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+
+                    let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                    let pb = parseFloat(timeString.split(":")[1]);
+
+                    for (let i = 0; i < filteredRuns.length; i++) {
+                        if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
+                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
+                        }
+                        else {
+                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                        }                        
+
+                        if (num <= 0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
+                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
+                        }
+
+                        j++;
+
                     }
-                    else {
-                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                }
+            })
+            .catch(error => console.error('Error fetching leaderboard data:', error));
+    }
+
+    else if (window.location.pathname == "/vgp/3081") { // argentinia prov
+        // Fetch the leaderboard data from the API
+        fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/ewpg2rkw/5dwvozlk')
+            .then(response => response.json())
+            .then(leaderboardData => {
+
+                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values);
+
+                //console.log(filteredRuns);
+
+                let j = 1;
+                let num = 0;
+
+                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+                    let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                    let pb = parseFloat(timeString.split(":")[1]);
+                    let conditionMet = false;  // Flag to check if condition is met at least once
+
+                    for (let i = 0; i < filteredRuns.length; i++) {
+                        if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
+                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
+                        } else {
+                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                        }
+
+                        if (num <= 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
+                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
+                            conditionMet = true;  // Set flag to true if condition is met
+                        }
+
+                        j++;
                     }
 
-                    j++;                    
-
-                    if (num < 0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
+                    // If condition was never met, set j to filteredRuns.length + 1
+                    if (!conditionMet && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
+                        j = filteredRuns.length + 1;
                         document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
                     }
-
                 }
-            }
-        })
-        .catch(error => console.error('Error fetching leaderboard data:', error));
+
+            })
+            .catch(error => console.error('Error fetching leaderboard data:', error));
+    }
+
+    
 }
 
 function ApplyColors() {
@@ -683,7 +738,7 @@ function ApplyColors() {
 var unset = true;
 var boldNamesOopsie = true;
 var labelColor = true;
-var europecountries = false;
+var src = true;
 var toggled = false;
 var eventListenersAdded = false;
 
@@ -692,4 +747,4 @@ createForm();
 setSettings();
 
 setInterval(setSettings, 500);
-setInterval(ApplyColors, 100);
+setInterval(ApplyColors, 50);
