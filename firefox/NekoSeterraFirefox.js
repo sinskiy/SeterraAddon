@@ -18,6 +18,7 @@ function createForm() {
 
         const checkboxes = [
             { id: 'darkModeCbxId', text: 'Enable dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
+            { id: 'mapBgId', text: 'Enable dark/light water', title: 'Changes the water background to the background color of dark- or light mode.' },
             { id: 'mapPaddingCbxId', text: 'Enable extra map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
             { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\n!!! DOES NOT WORK FOR ZOOM VALUES OVER 140%' },
@@ -77,7 +78,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.6.5 - 29th of May 2024";
+        version.textContent = "v1.7.0 - 29th of May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -94,14 +95,14 @@ function customTable(bool) {
 
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "834px";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "848px";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
 
 
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "850px";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "864px";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
             unset = false;
         }
@@ -403,16 +404,6 @@ function meow() {
     if (window.location.pathname.substring(0, 4) == "/vgp") {
         createForm();
         document.getElementById("NekoAddon").style.display = "block"
-        // var unset = true;
-        // var boldNamesOopsie = true;
-        // var labelColor = true;
-
-        //if (window.location.pathname == "/vgp/3007") {
-        //    europecountries = true; // src ranking bool
-        //}
-        //else {
-        //    europecountries = false;
-        //}
     }
     else {
         document.getElementById("NekoAddon").style.display = "none"
@@ -426,6 +417,16 @@ function meow() {
         else {
             document.getElementById("darkModeCbxId").checked = false;
             lightMode();
+        }
+    });
+    getData("mapBg").then(beans11 => {
+        if (beans11) {
+            document.getElementById("mapBgId").checked = true;
+            mapBg(true);
+        }
+        else {
+            document.getElementById("mapBgId").checked = false;
+            mapBg(false);
         }
     });
     getData("mapPadding").then(beans2 => {
@@ -494,8 +495,8 @@ function meow() {
             names(false);
         }
     });
-    getData("removeClickOn").then(beans8 => {
-        if (beans8) {
+    getData("removeClickOn").then(beans80 => {
+        if (beans80) {
             document.getElementById("remClickOnCbxId").checked = true;
             remClickOn(true);
         }
@@ -519,8 +520,8 @@ function meow() {
         setInterval(compareBestTime, 2000);
     }
 
-    getData("initialReload").then(beans9 => {
-        if (!beans9) {
+    getData("initialReload").then(beans90 => {
+        if (!beans90) {
             chrome.storage.local.set({
                 "initialReload": true
             });
@@ -548,6 +549,7 @@ function setSettings() {
     if (!eventListenersAdded) {
         
         handleCheckboxChange("darkModeCbxId", "darkMode", darkMode);
+        handleCheckboxChange("mapBgId", "mapBg", mapBg);
         handleCheckboxChange("mapPaddingCbxId", "mapPadding", mapPadding);
         handleCheckboxChange("mapResetCbxId", "quickReset", mapReset);
         handleCheckboxChange("removeLeftPaddingCbxId", "removeLeft", noLeftSpace);
@@ -582,6 +584,7 @@ function handleCheckboxChange(checkboxId, storageKey, callback, reload = false) 
 
 setInitialData({
     "darkMode": true,
+    "mapBg": false,
     "mapPadding": true,
     "quickReset": true,
     "removeLeft": true,
@@ -703,7 +706,34 @@ function compareBestTime() {
     
 }
 
+function mapBg(bool) {
+    if (bool) {
+        getData("darkMode").then(beans0 => {
+            if (beans0) {
+                if (document.getElementById(`WATER`)) {
+                    document.getElementById(`WATER`).style.fill = "none";
+                }
+            }
+            else {
+                if (document.getElementById(`WATER`)) {
+                    document.getElementById(`WATER`).style.fill = "none";
+                }
+            }
+        });
+    }
+    else {
+        if (document.getElementById(`WATER`)) {
+            document.getElementById(`WATER`).style.fill = "#a4d1dc";
+        }
+
+    }
+}
+
+
 function ApplyColors() {
+    if (document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0]) {
+        document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0].style.boxShadow = "none"
+    }   
     if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
         getData("darkMode").then(beans0 => {
             if (beans0) {
