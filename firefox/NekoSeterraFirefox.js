@@ -77,7 +77,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.6.4 - 26th of May 2024";
+        version.textContent = "v1.6.5 - 29th of May 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -91,9 +91,17 @@ function createForm() {
 function customTable(bool) {
     if (bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "834px";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
+
+
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "900px";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "850px";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
             unset = false;
         }
@@ -199,6 +207,7 @@ function darkMode() {
     });
     document.getElementById('nekoheaderid').style.color = "#FF006E";
     document.getElementById('versionid').style.color = "#CC0058";
+    document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
     if(document.querySelectorAll("div.container_content__Z3nYC")[0]){document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B'};
     if(document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]){document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B'};
     document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
@@ -235,7 +244,7 @@ function lightMode() {
     });
     document.getElementById('nekoheaderid').style.color = "#FF006E";
     document.getElementById('versionid').style.color = "#CC0058";  
-
+    document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
     if(document.querySelectorAll("div.container_content__Z3nYC")[0]){document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#E7E5E4'};
     if(document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]){document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#E7E5E4'};
     document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
