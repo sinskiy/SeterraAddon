@@ -4,7 +4,7 @@ function createForm() {
         const nekoMain = document.createElement("div");
         nekoMain.id = "NekoAddon";
         nekoMain.style.position = "absolute";
-        nekoMain.style.top = "582px";
+        nekoMain.style.top = "442px";
         nekoMain.style.left = "18px";
 
         const nekoHeader = document.createElement("h2");
@@ -17,12 +17,12 @@ function createForm() {
         nekoMain.appendChild(nekoForm);
 
         const checkboxes = [
-            { id: 'darkModeCbxId', text: 'Enable dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
-            { id: 'mapBgId', text: 'Enable dark/light water', title: 'Changes the water background to the background color of dark- or light mode.' },
-            { id: 'mapPaddingCbxId', text: 'Enable extra map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
+            { id: 'darkModeCbxId', text: 'Dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
+            { id: 'mapBgId', text: 'Disable water', title: 'Shows or hides the water background.' },
+            { id: 'mapPaddingCbxId', text: 'Map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
             { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\n!!! DOES NOT WORK FOR ZOOM VALUES OVER 140%' },
-            { id: 'showScoresCbxId', text: 'Show personal top 10', title: 'Shows your top 10 best scores on the left of the map.\n!!! ONLY WORKS WHEN LOGGED IN' },
+            { id: 'showScoresCbxId', text: 'Show top 10', title: 'Shows your top 10 best scores on the left of the map.\n!!! ONLY WORKS WHEN LOGGED IN' },
             { id: 'showCursorLabelCbxId', text: 'Show cursor label', title: 'Shows or hides the label that tracks the cursor.' },
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
             { id: 'showFlagCbxId', text: 'Show area flags', title: 'Shows or hides area flags.' },
@@ -78,7 +78,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.7.0 - 29th of May 2024";
+        version.textContent = "v1.7.1 - 11th of June 2024";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -93,16 +93,40 @@ function customTable(bool) {
     if (bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
 
+            // Check if an element with the text "Visit SRC Page" already exists
+            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+            .find(a => a.textContent === "Visit SRC Page");
+
+            if (!existingSrcLink) {
+                var srcLink = document.createElement('a');
+                srcLink.textContent = "Visit SRC Page";
+                srcLink.style.position = "absolute";
+                srcLink.style.backgroundColor = "unset";
+                srcLink.style.top = "996px";
+                srcLink.style.left = "23px";
+                srcLink.style.color = "#FF006E";
+                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcLink);
+                var srcApiDisclaimer = document.createElement('p');
+                srcApiDisclaimer.style.position = "absolute";
+                srcApiDisclaimer.style.backgroundColor = "unset";
+                srcApiDisclaimer.style.top = "1016px";
+                srcApiDisclaimer.style.left = "23px";
+                srcApiDisclaimer.style.color = "red";
+                srcApiDisclaimer.style.fontSize = "11px";
+                srcApiDisclaimer.textContent = "* API is not 100% reliable, ranking might be slightly off.";
+                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcApiDisclaimer);
+            }
+
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "848px";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "708px";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
 
 
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "864px";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "724px";
             document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
             unset = false;
         }
@@ -200,22 +224,29 @@ function mapReset(bool) {
 ///  Toggle for dark mode.
 function darkMode() {
 
-    if(document.querySelectorAll("div.seterra_content__nGh5_")[0]){document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B'};
-    if(document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#181A1B'};
-    if(document.getElementsByClassName("game-header_wrapper__JDf24")[0]){document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(24, 26, 27, 0.5)"};
+    if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){
+        if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor != 'rgb(24, 26, 27)'){
+            if(document.querySelectorAll("div.seterra_content__nGh5_")[0]){document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B'};
+            if(document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#181A1B'};
+            if(document.getElementsByClassName("game-header_wrapper__JDf24")[0]){document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(24, 26, 27, 0.5)"};
+            if(document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]){document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B'};
+            document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
+                element.style.color = "black";
+            });
+        
+            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+            .find(p => p.textContent === "* API is not 100% reliable, ranking might be slightly off.");
+        
+            if(existingSrcLink){existingSrcLink.style.color = 'red'};
+        
+
+        }        
+    }
     document.querySelectorAll(':not(a)').forEach(function (element) {
         element.style.color = 'white';
     });
-    document.getElementById('nekoheaderid').style.color = "#FF006E";
-    document.getElementById('versionid').style.color = "#CC0058";
-    document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
-    if(document.querySelectorAll("div.container_content__Z3nYC")[0]){document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B'};
-    if(document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]){document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B'};
-    document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
-        element.style.color = "black";
-    });
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
-
+        
         document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
 
         var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
@@ -225,7 +256,6 @@ function darkMode() {
             labelColor = false;
         }
     }
-
     if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
         document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
     }
@@ -234,42 +264,21 @@ function darkMode() {
             element.style.color = 'black';
         });
     }
+    document.getElementById('nekoheaderid').style.color = "#FF006E";
+    document.getElementById('versionid').style.color = "#CC0058";
+    if(document.getElementsByClassName("highscore_heading__mqofP")[0]){document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E"};
+    if(document.querySelectorAll("div.container_content__Z3nYC")[0]){document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B'};
+
+
 }
 ///  Toggle for light mode.
 function lightMode() {
-    if(document.querySelectorAll("div.seterra_content__nGh5_")[0]){document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#E7E5E4'};
-    if(document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#E7E5E4'};
-    if(document.getElementsByClassName("game-header_wrapper__JDf24")[0]){document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(231, 229, 228, 0.75)"};    
-    document.querySelectorAll(':not(a)').forEach(function (element) {
-        element.style.color = 'black';
-    });
-    document.getElementById('nekoheaderid').style.color = "#FF006E";
-    document.getElementById('versionid').style.color = "#CC0058";  
-    document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
-    if(document.querySelectorAll("div.container_content__Z3nYC")[0]){document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#E7E5E4'};
-    if(document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]){document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#E7E5E4'};
-    document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
-        element.style.color = "white";
-    });
-    if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
-        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(231, 229, 228, 0.75)"
-
-        var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
-
-        if (spanElement) {
-            spanElement.style.color = "black";
-            labelColor = false;
-        }
-    }
-    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
-    }
-    if (document.getElementsByClassName('game-area_gameArea__G2ABs')[0]) {
-        document.getElementsByClassName('game-area_gameArea__G2ABs')[0].childNodes.forEach(function (element) {
-            element.style.color = 'white';
-        });
-    }
+    if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){
+        if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor == 'rgb(24, 26, 27)'){
+            location.reload();
+        }        
+    };    
 }
 ///  Toggle cursor label visibility.
 function cursorLabel(bool) {
@@ -612,6 +621,26 @@ function findMS(value) {
     return substringAfterDot.length;
 }
 
+function getOrdinalSuffix(num) {
+    const j = num % 10,
+          k = num % 100;
+
+    if (k === 11 || k === 12 || k === 13) {
+        return num + "th";
+    }
+
+    switch (j) {
+        case 1:
+            return num + "st";
+        case 2:
+            return num + "nd";
+        case 3:
+            return num + "rd";
+        default:
+            return num + "th";
+    }
+}
+
 function compareBestTime() {
 
     // cheat sheet
@@ -622,40 +651,44 @@ function compareBestTime() {
 
     if (window.location.pathname == "/vgp/3007") { // eur countr
         // Fetch the leaderboard data from the API
+
+        var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+        .find(a => a.textContent === "Visit SRC Page");
+
+        if (existingSrcLink){
+            existingSrcLink.setAttribute('href', 'https://www.speedrun.com/seterra?h=Europe_Countries_with_Kosovo-pin-Website&x=jdz0yzv2-7893xeq8.qj77360q-j84vge28.q8kk983q');
+            existingSrcLink.setAttribute('target', '_blank');
+        }
+
         fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2')
             .then(response => response.json())
             .then(leaderboardData => {
-                const specificKey = "7893xeq8";
-                const pinValue = "qj77360q";
+            const specificKey = "7893xeq8";
+            const pinValue = "qj77360q";
 
-                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
+            const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
+            let j = 1;
+            let num = 0;
 
-                let j = 1;
-                let num = 0;
 
+            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
 
-                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+                var timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                let pb = (parseFloat(timeString.split(":")[0])*60+(parseFloat(timeString.split(":")[1])));
 
-                    let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                    let pb = parseFloat(timeString.split(":")[1]);
+                for (let i = 0; i < filteredRuns.length; i++) {
 
-                    for (let i = 0; i < filteredRuns.length; i++) {
-                        if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
-                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
-                        }
-                        else {
-                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
-                        }                        
+                    num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
 
-                        if (num <= 0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
-                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
-                        }
-
-                        j++;
-
+                    if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
                     }
+
+                    j++;
+
                 }
-            })
+            }
+        })
             .catch(error => console.error('Error fetching leaderboard data:', error));
     }
 
