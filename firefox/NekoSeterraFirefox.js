@@ -179,10 +179,14 @@ function zoomFunc(amnt, px, zoom) {
             document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = px + "px";
         }
         if (amnt <= 1.4) {
+            if(document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0]){
             document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "block";
         }
+        }
         else {
+            if(document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0]){
             document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "none";
+            }
         }
     }
 }
