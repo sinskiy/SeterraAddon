@@ -21,13 +21,14 @@ function createForm() {
             { id: 'mapBgId', text: 'Disable water', title: 'Shows or hides the water background.' },
             { id: 'mapPaddingCbxId', text: 'Map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
-            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.\n!!! DOES NOT WORK FOR ZOOM VALUES OVER 140%' },
+            { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.' },
             { id: 'showScoresCbxId', text: 'Show top 10', title: 'Shows your top 10 best scores on the left of the map.\n!!! ONLY WORKS WHEN LOGGED IN' },
             { id: 'showCursorLabelCbxId', text: 'Show cursor label', title: 'Shows or hides the label that tracks the cursor.' },
             { id: 'boldNamesCbxId', text: 'Show bold names', title: 'Shows or hides bold names.' },
             { id: 'showFlagCbxId', text: 'Show area flags', title: 'Shows or hides area flags.' },
             { id: 'showNamesCbxId', text: 'Show area names', title: 'Shows or hides area names.' },
-            { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' }
+            { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' },
+            { id: 'moveCbxId', text: 'Move extension down', title: 'Moves the extension (and top 10 if applicable) downwards so it doesn\'t overlap with the map.' }
         ];
 
         // Create a style element
@@ -78,7 +79,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.7.1 - 11th of June 2024";
+        version.textContent = "v1.8.0 - 12th of June 2024 (Firefox)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -92,43 +93,48 @@ function createForm() {
 function customTable(bool) {
     if (bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+                    // Check if an element with the text "Visit SRC Page" already exists
+                    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                        .find(a => a.textContent === "Visit SRC Page");
 
-            // Check if an element with the text "Visit SRC Page" already exists
-            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-            .find(a => a.textContent === "Visit SRC Page");
+                    if (!existingSrcLink) {
+                        var srcLink = document.createElement('a');
+                        srcLink.textContent = "Visit SRC Page";
+                        srcLink.style.position = "absolute";
+                        srcLink.style.backgroundColor = "unset";
+                        getData("moveEx").then(beans54678 => {
+                            if (beans54678) {
+                                srcLink.style.top = 996 + 40 + "px";
+                            }
+                        });
+                        srcLink.style.left = "23px";
+                        srcLink.style.color = "#FF006E";
+                        document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcLink);
+                        var srcApiDisclaimer = document.createElement('p');
+                        srcApiDisclaimer.style.position = "absolute";
+                        srcApiDisclaimer.style.backgroundColor = "unset";
+                        getData("moveEx").then(beans54678 => {
+                            if (beans54678) {
+                                srcApiDisclaimer.style.top = 1016 + 40 + "px";
+                            }
+                        });                        
+                        srcApiDisclaimer.style.left = "23px";
+                        srcApiDisclaimer.style.color = "red";
+                        srcApiDisclaimer.style.fontSize = "11px";
+                        srcApiDisclaimer.textContent = "* API is not 100% reliable, ranking might be slightly off.";
+                        document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcApiDisclaimer);
+                    }
 
-            if (!existingSrcLink) {
-                var srcLink = document.createElement('a');
-                srcLink.textContent = "Visit SRC Page";
-                srcLink.style.position = "absolute";
-                srcLink.style.backgroundColor = "unset";
-                srcLink.style.top = "996px";
-                srcLink.style.left = "23px";
-                srcLink.style.color = "#FF006E";
-                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcLink);
-                var srcApiDisclaimer = document.createElement('p');
-                srcApiDisclaimer.style.position = "absolute";
-                srcApiDisclaimer.style.backgroundColor = "unset";
-                srcApiDisclaimer.style.top = "1016px";
-                srcApiDisclaimer.style.left = "23px";
-                srcApiDisclaimer.style.color = "red";
-                srcApiDisclaimer.style.fontSize = "11px";
-                srcApiDisclaimer.textContent = "* API is not 100% reliable, ranking might be slightly off.";
-                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcApiDisclaimer);
-            }
-
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "708px";
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
-            document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
+                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
+                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
+                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
+                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
 
 
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "724px";
-            document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
-            unset = false;
+                    document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
+                    document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
+                    document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
+                    unset = false;
         }
     }
 }
@@ -136,7 +142,7 @@ function customTable(bool) {
 function remClickOn(bool) {
     if (bool) {
         if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
-          
+
             if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span')) {
                 document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').childNodes[0].textContent = "";
             }
@@ -157,13 +163,13 @@ function mapPadding(bool) {
     if (bool) {
         if (document.getElementsByClassName("extra-info_extraInfo__80Tci")) {
             let a = document.getElementsByClassName("extra-info_extraInfo__80Tci");
-            if (a[0]){a[0].style.marginTop = "200px"};
+            if (a[0]) { a[0].style.marginTop = "200px" };
         }
     }
     else {
         if (document.getElementsByClassName("extra-info_extraInfo__80Tci")) {
             let a = document.getElementsByClassName("extra-info_extraInfo__80Tci");
-            if (a[0]){a[0].style.marginTop = "0px"};
+            if (a[0]) { a[0].style.marginTop = "0px" };
         }
     }
 }
@@ -171,6 +177,12 @@ function zoomFunc(amnt, px, zoom) {
     if (zoom == amnt) {
         if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
             document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = px + "px";
+        }
+        if (amnt <= 1.4) {
+            document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "block";
+        }
+        else {
+            document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "none";
         }
     }
 }
@@ -191,6 +203,7 @@ function noLeftSpace(bool) {
         zoomFunc(1.2, 380, zoom) // 120%
         zoomFunc(1.3, 315, zoom) // 130%
         zoomFunc(1.4, 267, zoom) // 140%
+        zoomFunc(1.5, 267, zoom) // 150+%
     }
     else {
         if (document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0]) {
@@ -209,13 +222,13 @@ function spaceKeyDownHandler(event) {
         }
         else {
             document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[1].click();
-        }        
+        }
     }
 }
 ///  Map reset check.
 function mapReset(bool) {
     if (bool) {
-        document.addEventListener("keydown", spaceKeyDownHandler);  
+        document.addEventListener("keydown", spaceKeyDownHandler);
     }
     else {
         document.removeEventListener("keydown", spaceKeyDownHandler);
@@ -224,29 +237,33 @@ function mapReset(bool) {
 ///  Toggle for dark mode.
 function darkMode() {
 
-    if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){
-        if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor != 'rgb(24, 26, 27)'){
-            if(document.querySelectorAll("div.seterra_content__nGh5_")[0]){document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B'};
-            if(document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#181A1B'};
-            if(document.getElementsByClassName("game-header_wrapper__JDf24")[0]){document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(24, 26, 27, 0.5)"};
-            if(document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]){document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B'};
+    if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]) {
+        if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor != 'rgb(24, 26, 27)') {
+            if (document.querySelectorAll("div.seterra_content__nGh5_")[0]) { document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B' };
+            if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]) { document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#181A1B' };
+            if (document.getElementsByClassName("game-header_wrapper__JDf24")[0]) { document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(24, 26, 27, 0.5)" };
+            if (document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]) { document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B' };
             document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
                 element.style.color = "black";
             });
-        
-            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-            .find(p => p.textContent === "* API is not 100% reliable, ranking might be slightly off.");
-        
-            if(existingSrcLink){existingSrcLink.style.color = 'red'};
-        
-
-        }        
+        }
+    }
+    else if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")) {
+        if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor != 'rgb(24, 26, 27)') {
+            if (document.querySelectorAll("div.seterra_content__nGh5_")[0]) { document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B' };
+            if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) { document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor = '#181A1B' };
+            if (document.getElementsByClassName("game-header_wrapper__JDf24")[0]) { document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(24, 26, 27, 0.5)" };
+            if (document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]) { document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B' };
+            document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
+                element.style.color = "black";
+            });
+        }
     }
     document.querySelectorAll(':not(a)').forEach(function (element) {
         element.style.color = 'white';
     });
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
-        
+
         document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
 
         var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
@@ -266,26 +283,26 @@ function darkMode() {
     }
     document.getElementById('nekoheaderid').style.color = "#FF006E";
     document.getElementById('versionid').style.color = "#CC0058";
-    if(document.getElementsByClassName("highscore_heading__mqofP")[0]){document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E"};
-    if(document.querySelectorAll("div.container_content__Z3nYC")[0]){document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B'};
+    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E" };
+    if (document.querySelectorAll("div.container_content__Z3nYC")[0]) { document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B' };
 
 
 }
 ///  Toggle for light mode.
 function lightMode() {
 
-    if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]){
-        if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor == 'rgb(24, 26, 27)'){
+    if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]) {
+        if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor == 'rgb(24, 26, 27)') {
             location.reload();
-        }        
-    };    
+        }
+    };
 }
 ///  Toggle cursor label visibility.
 function cursorLabel(bool) {
     if (bool) {
         if (document.getElementsByClassName('game-area_tooltip__Ns9Yi')[0]) {
             document.getElementsByClassName('game-area_tooltip__Ns9Yi')[0].style.display = "block";
-        }       
+        }
     }
     else {
         if (document.getElementsByClassName('game-area_tooltip__Ns9Yi')[0]) {
@@ -298,7 +315,7 @@ function boldNames(bool) {
     if (bool) {
         if (document.getElementsByClassName('game-header_withDivider__ZHYAO')[2]) {
             document.getElementsByClassName('game-header_withDivider__ZHYAO')[2].children[0].style.fontWeight = "bold";
-        }        
+        }
         if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
             if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span')) {
                 if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong')) {
@@ -323,11 +340,11 @@ function boldNames(bool) {
                     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong').style.fontWeight == "normal") {
                         boldNamesOopsie = false;
                     }
-                    
+
                 }
 
             }
-        }   
+        }
     }
 }
 ///  Toggle area flags.
@@ -373,7 +390,7 @@ function names(bool) {
             if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].childNodes[0]) {
                 if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].childNodes[0].childNodes[0]) {
                     document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].childNodes[0].style.display = "none";
-                }                
+                }
             }
         }
         if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
@@ -524,6 +541,16 @@ function meow() {
             boldNames(false);
         }
     });
+    getData("moveEx").then(beans924 => {
+        if (beans924) {
+            document.getElementById("moveCbxId").checked = true;
+            moveExtension(true);
+        }
+        else {
+            document.getElementById("moveCbxId").checked = false;
+            moveExtension(false);
+        }
+    });
     if (src && !toggled) {
         toggled = true;
         setInterval(compareBestTime, 2000);
@@ -547,7 +574,7 @@ function setSettings() {
             customTable(true);
         }
     });
-    
+
     document.getElementById('nekoheaderid').style.color = "#FF006E";
     document.getElementById('versionid').style.color = "#CC0058";
 
@@ -556,7 +583,7 @@ function setSettings() {
     }
 
     if (!eventListenersAdded) {
-        
+
         handleCheckboxChange("darkModeCbxId", "darkMode", darkMode);
         handleCheckboxChange("mapBgId", "mapBg", mapBg);
         handleCheckboxChange("mapPaddingCbxId", "mapPadding", mapPadding);
@@ -568,11 +595,64 @@ function setSettings() {
         handleCheckboxChange("showFlagCbxId", "showFlags", flags);
         handleCheckboxChange("showNamesCbxId", "showNames", names);
         handleCheckboxChange("remClickOnCbxId", "removeClickOn", remClickOn);
-        
+        handleCheckboxChange("moveCbxId", "moveEx", moveExtension);
+
         eventListenersAdded = true;
     }
-    if(document.getElementsByClassName("seterra_adFooter__4glju")[0]){document.getElementsByClassName("seterra_adFooter__4glju")[0].remove()};
+    if (document.getElementsByClassName("seterra_adFooter__4glju")[0]) { document.getElementsByClassName("seterra_adFooter__4glju")[0].remove() };
     meow();
+}
+
+function moveExtension(bool) {
+    if (bool) {
+        document.getElementById("NekoAddon").style.top = "1250px"
+        getData("showTop10").then(beans5467 => {
+            if (beans5467) {
+                // move top 10 down
+                // Check if an element with the text "Visit SRC Page" already exists
+                var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                    .find(a => a.textContent === "Visit SRC Page");
+
+                if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
+
+                var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+                    .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
+                if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
+
+                if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = 748 + 800 + "px" };
+                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = 764 + 800 + "px" };
+            }
+            else {
+                // Check if an element with the text "Visit SRC Page" already exists
+                var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                    .find(a => a.textContent === "Visit SRC Page");
+
+                if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
+
+                var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+                    .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
+                if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
+
+                if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
+                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+            }
+        });
+    }
+    else {
+        var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+            .find(a => a.textContent === "Visit SRC Page");
+
+        if (existingSrcLink) { existingSrcLink.style.top = 996 + 40 + "px" };
+
+        var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+            .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
+            
+        if (apiDisc) { apiDisc.style.top = 1016 + 40 + "px" };
+        
+        document.getElementById("NekoAddon").style.top = "442px"
+        if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
+        if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+    }
 }
 
 function handleCheckboxChange(checkboxId, storageKey, callback, reload = false) {
@@ -580,7 +660,7 @@ function handleCheckboxChange(checkboxId, storageKey, callback, reload = false) 
         let isChecked = document.getElementById(checkboxId).checked;
         let storageObj = {};
         storageObj[storageKey] = isChecked;
-        
+
         browser.storage.local.set(storageObj);
 
         if (reload && !isChecked && document.getElementsByClassName("highscore_table__oKrYg")[0]) {
@@ -603,6 +683,7 @@ setInitialData({
     "showFlags": true,
     "showNames": true,
     "removeClickOn": false,
+    "moveEx": false,
     "initialReload": false
 }).then(() => {
     setSettings();
@@ -623,7 +704,7 @@ function findMS(value) {
 
 function getOrdinalSuffix(num) {
     const j = num % 10,
-          k = num % 100;
+        k = num % 100;
 
     if (k === 11 || k === 12 || k === 13) {
         return num + "th";
@@ -653,9 +734,9 @@ function compareBestTime() {
         // Fetch the leaderboard data from the API
 
         var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-        .find(a => a.textContent === "Visit SRC Page");
+            .find(a => a.textContent === "Visit SRC Page");
 
-        if (existingSrcLink){
+        if (existingSrcLink) {
             existingSrcLink.setAttribute('href', 'https://www.speedrun.com/seterra?h=Europe_Countries_with_Kosovo-pin-Website&x=jdz0yzv2-7893xeq8.qj77360q-j84vge28.q8kk983q');
             existingSrcLink.setAttribute('target', '_blank');
         }
@@ -663,32 +744,84 @@ function compareBestTime() {
         fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2')
             .then(response => response.json())
             .then(leaderboardData => {
-            const specificKey = "7893xeq8";
-            const pinValue = "qj77360q";
+                const specificKey = "7893xeq8";
+                const pinValue = "qj77360q";
 
-            const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
-            let j = 1;
-            let num = 0;
+                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
+                let j = 1;
+                let num = 0;
 
 
-            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
 
-                var timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                let pb = (parseFloat(timeString.split(":")[0])*60+(parseFloat(timeString.split(":")[1])));
+                    var timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                    let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
 
-                for (let i = 0; i < filteredRuns.length; i++) {
+                    for (let i = 0; i < filteredRuns.length; i++) {
 
-                    num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
 
-                    if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
-                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                        if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                        }
+
+                        j++;
+
+                    }
+                }
+            })
+            .catch(error => console.error('Error fetching leaderboard data:', error));
+    }
+
+    else if (window.location.pathname == "/vgp/3008") { // swe prov
+        // Fetch the leaderboard data from the API
+        var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+            .find(a => a.textContent === "Visit SRC Page");
+
+        if (existingSrcLink) {
+            existingSrcLink.setAttribute('href', 'https://www.speedrun.com/seterra?h=Sweden_Provinces-Pin-Website&x=l_y9ml341w-5dwvozlk-j84vge28.q8kk983q');
+            existingSrcLink.setAttribute('target', '_blank');
+        }
+
+        fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/y9ml341w/5dwvozlk')
+            .then(response => response.json())
+            .then(leaderboardData => {
+
+                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values);
+
+                // console.log(filteredRuns);
+
+                let j = 1;
+                let num = 0;
+
+                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+                    let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                    let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
+                    let conditionMet = false;  // Flag to check if condition is met at least once
+
+                    for (let i = 0; i < filteredRuns.length; i++) {
+                        if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
+                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
+                        } else {
+                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                        }
+
+                        if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                            conditionMet = true;
+                        }
+
+                        j++;
                     }
 
-                    j++;
-
+                    // If condition was never met, set j to filteredRuns.length + 1
+                    if (!conditionMet && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                        j = filteredRuns.length + 1;
+                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                    }
                 }
-            }
-        })
+
+            })
             .catch(error => console.error('Error fetching leaderboard data:', error));
     }
 
@@ -700,14 +833,14 @@ function compareBestTime() {
 
                 const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values);
 
-                //console.log(filteredRuns);
+                // console.log(filteredRuns);
 
                 let j = 1;
                 let num = 0;
 
                 if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
                     let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                    let pb = parseFloat(timeString.split(":")[1]);
+                    let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
                     let conditionMet = false;  // Flag to check if condition is met at least once
 
                     for (let i = 0; i < filteredRuns.length; i++) {
@@ -736,7 +869,7 @@ function compareBestTime() {
             .catch(error => console.error('Error fetching leaderboard data:', error));
     }
 
-    
+
 }
 
 function mapBg(bool) {
@@ -766,7 +899,7 @@ function mapBg(bool) {
 function ApplyColors() {
     if (document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0]) {
         document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0].style.boxShadow = "none"
-    }   
+    }
     if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
         getData("darkMode").then(beans0 => {
             if (beans0) {
