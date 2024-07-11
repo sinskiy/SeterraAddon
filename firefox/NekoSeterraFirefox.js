@@ -79,7 +79,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.0 - 12th of June 2024 (Firefox)";
+        version.textContent = "v1.8.1 - 11th of July 2024 (Firefox)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -93,48 +93,48 @@ function createForm() {
 function customTable(bool) {
     if (bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-                    // Check if an element with the text "Visit SRC Page" already exists
-                    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                        .find(a => a.textContent === "Visit SRC Page");
+            // Check if an element with the text "Visit SRC Page" already exists
+            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                .find(a => a.textContent === "Visit SRC Page");
 
-                    if (!existingSrcLink) {
-                        var srcLink = document.createElement('a');
-                        srcLink.textContent = "Visit SRC Page";
-                        srcLink.style.position = "absolute";
-                        srcLink.style.backgroundColor = "unset";
-                        getData("moveEx").then(beans54678 => {
-                            if (beans54678) {
-                                srcLink.style.top = 996 + 40 + "px";
-                            }
-                        });
-                        srcLink.style.left = "23px";
-                        srcLink.style.color = "#FF006E";
-                        document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcLink);
-                        var srcApiDisclaimer = document.createElement('p');
-                        srcApiDisclaimer.style.position = "absolute";
-                        srcApiDisclaimer.style.backgroundColor = "unset";
-                        getData("moveEx").then(beans54678 => {
-                            if (beans54678) {
-                                srcApiDisclaimer.style.top = 1016 + 40 + "px";
-                            }
-                        });                        
-                        srcApiDisclaimer.style.left = "23px";
-                        srcApiDisclaimer.style.color = "red";
-                        srcApiDisclaimer.style.fontSize = "11px";
-                        srcApiDisclaimer.textContent = "* API is not 100% reliable, ranking might be slightly off.";
-                        document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcApiDisclaimer);
+            if (!existingSrcLink) {
+                var srcLink = document.createElement('a');
+                srcLink.textContent = "Visit SRC Page";
+                srcLink.style.position = "absolute";
+                srcLink.style.backgroundColor = "unset";
+                getData("moveEx").then(beans54678 => {
+                    if (beans54678) {
+                        srcLink.style.top = 996 + 40 + "px";
                     }
+                });
+                srcLink.style.left = "23px";
+                srcLink.style.color = "#FF006E";
+                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcLink);
+                var srcApiDisclaimer = document.createElement('p');
+                srcApiDisclaimer.style.position = "absolute";
+                srcApiDisclaimer.style.backgroundColor = "unset";
+                getData("moveEx").then(beans54678 => {
+                    if (beans54678) {
+                        srcApiDisclaimer.style.top = 1016 + 40 + "px";
+                    }
+                });
+                srcApiDisclaimer.style.left = "23px";
+                srcApiDisclaimer.style.color = "red";
+                srcApiDisclaimer.style.fontSize = "11px";
+                srcApiDisclaimer.textContent = "* API is not 100% reliable, ranking might be slightly off.";
+                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcApiDisclaimer);
+            }
 
-                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
-                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
-                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
-                    document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.left = "23px";
+            document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E";
 
 
-                    document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
-                    document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
-                    document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
-                    unset = false;
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.position = "absolute";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "unset";
+            document.getElementsByClassName("highscore_table__oKrYg")[0].style.left = "0px";
+            unset = false;
         }
     }
 }
@@ -179,13 +179,13 @@ function zoomFunc(amnt, px, zoom) {
             document.querySelectorAll("aside.seterra_sidebarLeft__wQo_r.seterra_sidebar__p6xf1.seterra_adContainerLeft__zTLsS")[0].style.width = px + "px";
         }
         if (amnt <= 1.4) {
-            if(document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0]){
-            document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "block";
-        }
+            if (document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0]) {
+                document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "block";
+            }
         }
         else {
-            if(document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0]){
-            document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "none";
+            if (document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0]) {
+                document.querySelectorAll("aside.seterra_sidebarRight__bXW1x.seterra_sidebar__p6xf1.seterra_adContainerRight__lDew4")[0].style.display = "none";
             }
         }
     }
@@ -252,7 +252,7 @@ function darkMode() {
             });
         }
     }
-    else if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")) {
+    else if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) {
         if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor != 'rgb(24, 26, 27)') {
             if (document.querySelectorAll("div.seterra_content__nGh5_")[0]) { document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B' };
             if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) { document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor = '#181A1B' };
@@ -263,9 +263,19 @@ function darkMode() {
             });
         }
     }
-    document.querySelectorAll(':not(a)').forEach(function (element) {
+
+    if (document.getElementsByClassName("seterra_content__nGh5_")[0]) { document.getElementsByClassName("seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B' };
+    if (document.getElementsByClassName("container_sizeMedium__Fwp9_")[0]) { document.getElementsByClassName("container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B' };
+
+    if (document.querySelectorAll(".games-list_viewAllLink__NQa_n")) {
+        document.querySelectorAll(".games-list_viewAllLink__NQa_n").forEach(function (element) {
+            element.style.background = 'none';
+        });
+    }
+
+    document.querySelectorAll(':not(a):not(input)').forEach(function (element) {
         element.style.color = 'white';
-    });
+    });    
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
         document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
@@ -614,48 +624,56 @@ function moveExtension(bool) {
             if (beans5467) {
                 // move top 10 down
                 // Check if an element with the text "Visit SRC Page" already exists
-                var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                    .find(a => a.textContent === "Visit SRC Page");
+                if (document.getElementsByClassName("highscore_heading__mqofP")[0]) {
+                    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                        .find(a => a.textContent === "Visit SRC Page");
 
-                if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
+                    if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
 
-                var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-                    .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
-                if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
+                    var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+                        .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
+                    if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
 
-                if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = 748 + 800 + "px" };
-                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = 764 + 800 + "px" };
+                    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = 748 + 800 + "px" };
+                    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = 764 + 800 + "px" };
+                }
+
             }
             else {
                 // Check if an element with the text "Visit SRC Page" already exists
-                var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                    .find(a => a.textContent === "Visit SRC Page");
+                if (document.getElementsByClassName("highscore_heading__mqofP")[0]) {
+                    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                        .find(a => a.textContent === "Visit SRC Page");
 
-                if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
+                    if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
 
-                var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-                    .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
-                if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
+                    var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+                        .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
+                    if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
 
-                if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
-                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+                    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
+                    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+                }
+
             }
         });
     }
     else {
-        var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-            .find(a => a.textContent === "Visit SRC Page");
+        if (document.getElementsByClassName("highscore_heading__mqofP")[0]) {
+            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+                .find(a => a.textContent === "Visit SRC Page");
 
-        if (existingSrcLink) { existingSrcLink.style.top = 996 + 40 + "px" };
+            if (existingSrcLink) { existingSrcLink.style.top = 996 + 40 + "px" };
 
-        var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-            .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
-            
-        if (apiDisc) { apiDisc.style.top = 1016 + 40 + "px" };
-        
-        document.getElementById("NekoAddon").style.top = "442px"
-        if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
-        if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+            var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
+                .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
+
+            if (apiDisc) { apiDisc.style.top = 1016 + 40 + "px" };
+
+            document.getElementById("NekoAddon").style.top = "442px"
+            if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
+            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+        }
     }
 }
 
@@ -726,151 +744,125 @@ function getOrdinalSuffix(num) {
     }
 }
 
+function compareWithKey(srclink, api) {
+    // Fetch the leaderboard data from the API
+
+    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+        .find(a => a.textContent === "Visit SRC Page");
+
+    if (existingSrcLink) {
+        existingSrcLink.setAttribute('href', srclink);
+        existingSrcLink.setAttribute('target', '_blank');
+    }
+
+    fetch(api)
+        .then(response => response.json())
+        .then(leaderboardData => {
+            const specificKey = "7893xeq8";
+            const pinValue = "qj77360q";
+
+            const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
+            let j = 1;
+            let num = 0;
+
+
+            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+
+                var timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
+
+                for (let i = 0; i < filteredRuns.length; i++) {
+
+                    num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+
+                    if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                    }
+
+                    j++;
+
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching leaderboard data:', error));
+}
+
+function compareWithoutKey(srclink, api) {
+    // Fetch the leaderboard data from the API
+    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
+        .find(a => a.textContent === "Visit SRC Page");
+
+    if (existingSrcLink) {
+        existingSrcLink.setAttribute('href', srclink);
+        existingSrcLink.setAttribute('target', '_blank');
+    }
+
+    fetch(api)
+        .then(response => response.json())
+        .then(leaderboardData => {
+
+            const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values);
+
+            // console.log(filteredRuns);
+
+            let j = 1;
+            let num = 0;
+
+            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+                let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
+                let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
+                let conditionMet = false;  // Flag to check if condition is met at least once
+
+                for (let i = 0; i < filteredRuns.length; i++) {
+                    if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
+                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
+                    } else {
+                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
+                    }
+
+                    if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                        conditionMet = true;
+                    }
+
+                    j++;
+                }
+
+                // If condition was never met, set j to filteredRuns.length + 1
+                if (!conditionMet && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
+                    j = filteredRuns.length + 1;
+                    document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
+                }
+            }
+
+        })
+        .catch(error => console.error('Error fetching leaderboard data:', error));
+}
+
 function compareBestTime() {
 
     // cheat sheet
     // all levels: https://www.speedrun.com/api/v1/games/nd28p43d/levels
 
-    // europe countries: https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2
-    // argentinia provinces (pin) : https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/ewpg2rkw/5dwvozlk
-
     if (window.location.pathname == "/vgp/3007") { // eur countr
-        // Fetch the leaderboard data from the API
-
-        var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-            .find(a => a.textContent === "Visit SRC Page");
-
-        if (existingSrcLink) {
-            existingSrcLink.setAttribute('href', 'https://www.speedrun.com/seterra?h=Europe_Countries_with_Kosovo-pin-Website&x=jdz0yzv2-7893xeq8.qj77360q-j84vge28.q8kk983q');
-            existingSrcLink.setAttribute('target', '_blank');
-        }
-
-        fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2')
-            .then(response => response.json())
-            .then(leaderboardData => {
-                const specificKey = "7893xeq8";
-                const pinValue = "qj77360q";
-
-                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values[specificKey] === pinValue);
-                let j = 1;
-                let num = 0;
-
-
-                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-
-                    var timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                    let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
-
-                    for (let i = 0; i < filteredRuns.length; i++) {
-
-                        num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
-
-                        if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
-                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
-                        }
-
-                        j++;
-
-                    }
-                }
-            })
-            .catch(error => console.error('Error fetching leaderboard data:', error));
+        compareWithKey("https://www.speedrun.com/seterra?h=Europe_Countries_with_Kosovo-pin-Website&x=jdz0yzv2-7893xeq8.qj77360q-j84vge28.q8kk983q",
+            'https://www.speedrun.com/api/v1/leaderboards/nd28p43d/category/jdz0yzv2'
+        );
     }
 
     else if (window.location.pathname == "/vgp/3008") { // swe prov
-        // Fetch the leaderboard data from the API
-        var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-            .find(a => a.textContent === "Visit SRC Page");
-
-        if (existingSrcLink) {
-            existingSrcLink.setAttribute('href', 'https://www.speedrun.com/seterra?h=Sweden_Provinces-Pin-Website&x=l_y9ml341w-5dwvozlk-j84vge28.q8kk983q');
-            existingSrcLink.setAttribute('target', '_blank');
-        }
-
-        fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/y9ml341w/5dwvozlk')
-            .then(response => response.json())
-            .then(leaderboardData => {
-
-                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values);
-
-                // console.log(filteredRuns);
-
-                let j = 1;
-                let num = 0;
-
-                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-                    let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                    let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
-                    let conditionMet = false;  // Flag to check if condition is met at least once
-
-                    for (let i = 0; i < filteredRuns.length; i++) {
-                        if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
-                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
-                        } else {
-                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
-                        }
-
-                        if (num < 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
-                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
-                            conditionMet = true;
-                        }
-
-                        j++;
-                    }
-
-                    // If condition was never met, set j to filteredRuns.length + 1
-                    if (!conditionMet && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(~")) {
-                        j = filteredRuns.length + 1;
-                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (~` + getOrdinalSuffix(j) + `)*`;
-                    }
-                }
-
-            })
-            .catch(error => console.error('Error fetching leaderboard data:', error));
+        compareWithoutKey('https://www.speedrun.com/seterra?h=Sweden_Provinces-Pin-Website&x=l_y9ml341w-5dwvozlk-j84vge28.q8kk983q',
+            'https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/y9ml341w/5dwvozlk')
     }
 
     else if (window.location.pathname == "/vgp/3081") { // argentinia prov
-        // Fetch the leaderboard data from the API
-        fetch('https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/ewpg2rkw/5dwvozlk')
-            .then(response => response.json())
-            .then(leaderboardData => {
+        compareWithoutKey('https://www.speedrun.com/seterra?h=Argentina_Provinces-Pin-Website&x=l_ewpg2rkw-5dwvozlk-j84vge28.q8kk983q',
+            'https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/ewpg2rkw/5dwvozlk');
+    }
 
-                const filteredRuns = leaderboardData.data.runs.filter(run => run.run.values);
-
-                // console.log(filteredRuns);
-
-                let j = 1;
-                let num = 0;
-
-                if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-                    let timeString = document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText;
-                    let pb = (parseFloat(timeString.split(":")[0]) * 60 + (parseFloat(timeString.split(":")[1])));
-                    let conditionMet = false;  // Flag to check if condition is met at least once
-
-                    for (let i = 0; i < filteredRuns.length; i++) {
-                        if (findMS(filteredRuns[i].run.times.primary_t.toString()) <= 2) {
-                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t + `0`);
-                        } else {
-                            num = pb - parseFloat(filteredRuns[i].run.times.primary_t);
-                        }
-
-                        if (num <= 0.0 && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
-                            document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
-                            conditionMet = true;  // Set flag to true if condition is met
-                        }
-
-                        j++;
-                    }
-
-                    // If condition was never met, set j to filteredRuns.length + 1
-                    if (!conditionMet && !document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText.includes("(#")) {
-                        j = filteredRuns.length + 1;
-                        document.getElementsByClassName('highscore_table__oKrYg')[0].childNodes[1].childNodes[0].childNodes[2].innerText += ` (#` + j + `)`;
-                    }
-                }
-
-            })
-            .catch(error => console.error('Error fetching leaderboard data:', error));
+    else if (window.location.pathname == "/vgp/3398") { // albania count
+        compareWithoutKey('https://www.speedrun.com/seterra?h=Argentina_Provinces-Pin-Website&x=l_ewpg2rkw-5dwvozlk-j84vge28.q8kk983q',
+            'https://www.speedrun.com/api/v1/leaderboards/nd28p43d/level/z981q7gw/5dwvozlk');
     }
 
 
@@ -883,10 +875,8 @@ function mapBg(bool) {
                 if (document.getElementById(`WATER`)) {
                     document.getElementById(`WATER`).style.fill = "none";
                 }
-            }
-            else {
-                if (document.getElementById(`WATER`)) {
-                    document.getElementById(`WATER`).style.fill = "none";
+                else if (document.getElementById(`BACKGROUND`)) {
+                    document.getElementById(`BACKGROUND`).style.fill = "none";
                 }
             }
         });
@@ -894,6 +884,9 @@ function mapBg(bool) {
     else {
         if (document.getElementById(`WATER`)) {
             document.getElementById(`WATER`).style.fill = "#a4d1dc";
+        }
+        else if (document.getElementById(`BACKGROUND`)) {
+            document.getElementById(`BACKGROUND`).style.fill = "#deded7";
         }
 
     }
