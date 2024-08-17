@@ -79,12 +79,23 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.4 - 13th of August 2024 (Chromium)";
+        version.textContent = "v1.8.5 - 17th of August 2024 (Chromium)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
         version.id = 'versionid';
         nekoMain.appendChild(version);
+
+        const changelog = document.createElement("a");
+        changelog.href = "https://github.com/NekoXIII/SeterraAddon/blob/main/changelog.md#185";
+        changelog.textContent = "Changelog";
+        changelog.style.fontSize = "12px";
+        changelog.style.position = "absolute";
+        changelog.style.left = "5px";
+        changelog.style.marginTop = "15px";
+        changelog.id = 'changelogid';
+        changelog.target = "_blank";
+        nekoMain.appendChild(changelog);
 
         document.body.appendChild(nekoMain);
     }

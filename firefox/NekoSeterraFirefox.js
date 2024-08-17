@@ -93,7 +93,8 @@ function createForm() {
         changelog.style.position = "absolute";
         changelog.style.left = "5px";
         changelog.style.marginTop = "15px";
-        changelog.id = 'versionid';
+        changelog.id = 'changelogid';
+        changelog.target = "_blank";
         nekoMain.appendChild(changelog);
 
         document.body.appendChild(nekoMain);
