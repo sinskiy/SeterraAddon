@@ -18,7 +18,7 @@ function createForm() {
 
         const checkboxes = [
             { id: 'darkModeCbxId', text: 'Dark mode', title: 'Changes the background to a darker color, uncheck to set it to white.' },
-            { id: 'mapBgId', text: 'Disable water', title: 'Shows or hides the water background.' },
+            { id: 'mapBgId', text: 'Disable background', title: 'Shows or hides the water background.' },
             { id: 'mapPaddingCbxId', text: 'Map padding', title: 'Adds extra padding below the map for a less distracting user experience.' },
             { id: 'mapResetCbxId', text: 'Quick map reset', title: 'Resets the map when the spacebar is pressed.' },
             { id: 'removeLeftPaddingCbxId', text: 'Center map', title: 'Adds space on the left side of the map to center the map.' },
@@ -79,7 +79,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.0 - 12th of June 2024 (Chromium)";
+        version.textContent = "v1.8.4 - 13th of August 2024 (Chromium)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -252,7 +252,7 @@ function darkMode() {
             });
         }
     }
-    else if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")) {
+    else if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) {
         if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor != 'rgb(24, 26, 27)') {
             if (document.querySelectorAll("div.seterra_content__nGh5_")[0]) { document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B' };
             if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) { document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor = '#181A1B' };
@@ -263,9 +263,19 @@ function darkMode() {
             });
         }
     }
-    document.querySelectorAll(':not(a)').forEach(function (element) {
+
+    if (document.getElementsByClassName("seterra_content__nGh5_")[0]) { document.getElementsByClassName("seterra_content__nGh5_")[0].style.backgroundColor = '#181A1B' };
+    if (document.getElementsByClassName("container_sizeMedium__Fwp9_")[0]) { document.getElementsByClassName("container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#181A1B' };
+
+    if (document.querySelectorAll(".games-list_viewAllLink__NQa_n")) {
+        document.querySelectorAll(".games-list_viewAllLink__NQa_n").forEach(function (element) {
+            element.style.background = 'none';
+        });
+    }
+
+    document.querySelectorAll(':not(a):not(input)').forEach(function (element) {
         element.style.color = 'white';
-    });
+    });    
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
         document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
@@ -291,15 +301,69 @@ function darkMode() {
     if (document.querySelectorAll("div.container_content__Z3nYC")[0]) { document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B' };
 
 
+
 }
 ///  Toggle for light mode.
 function lightMode() {
 
     if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]) {
         if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor == 'rgb(24, 26, 27)') {
-            location.reload();
+            if (document.querySelectorAll("div.seterra_content__nGh5_")[0]) { document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#E7E5E4' };
+            if (document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0]) { document.querySelectorAll("div.game-container_sizeSmall___C_u3")[0].style.backgroundColor = '#E7E5E4' };
+            if (document.getElementsByClassName("game-header_wrapper__JDf24")[0]) { document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(231, 229, 228, 0.5)" };
+            if (document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]) { document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#E7E5E4' };
+            document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
+                element.style.color = "white";
+            });
         }
-    };
+    }
+    else if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) {
+        if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor == 'rgb(24, 26, 27)') {
+            if (document.querySelectorAll("div.seterra_content__nGh5_")[0]) { document.querySelectorAll("div.seterra_content__nGh5_")[0].style.backgroundColor = '#E7E5E4' };
+            if (document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0]) { document.querySelectorAll("div.game-container_sizeMedium__ZYDZN")[0].style.backgroundColor = '#E7E5E4' };
+            if (document.getElementsByClassName("game-header_wrapper__JDf24")[0]) { document.getElementsByClassName("game-header_wrapper__JDf24")[0].style.background = "rgba(231, 229, 228, 0.5)" };
+            if (document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0]) { document.querySelectorAll("div.container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#E7E5E4' };
+            document.querySelectorAll("a.games-list_viewAllLink__NQa_n b").forEach(function (element) {
+                element.style.color = "white";
+            });
+        }
+    }
+
+    if (document.getElementsByClassName("seterra_content__nGh5_")[0]) { document.getElementsByClassName("seterra_content__nGh5_")[0].style.backgroundColor = '#E7E5E4' };
+    if (document.getElementsByClassName("container_sizeMedium__Fwp9_")[0]) { document.getElementsByClassName("container_sizeMedium__Fwp9_")[0].style.backgroundColor = '#E7E5E4' };
+
+    if (document.querySelectorAll(".games-list_viewAllLink__NQa_n")) {
+        document.querySelectorAll(".games-list_viewAllLink__NQa_n").forEach(function (element) {
+            element.style.background = 'none';
+        });
+    }
+
+    document.querySelectorAll(':not(a):not(input)').forEach(function (element) {
+        element.style.color = 'black';
+    });    
+    if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
+
+        document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(231, 229, 228, 0.75)";
+
+        var spanElement = document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].querySelector('span').querySelector('strong');
+
+        if (spanElement) {
+            spanElement.style.color = "black";
+            labelColor = false;
+        }
+    }
+    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
+        document.getElementsByClassName("highscore_table__oKrYg")[0].style.backgroundColor = "rgba(0,0,0,0)";
+    }
+    if (document.getElementsByClassName('game-area_gameArea__G2ABs')[0]) {
+        document.getElementsByClassName('game-area_gameArea__G2ABs')[0].childNodes.forEach(function (element) {
+            element.style.color = 'white';
+        });
+    }
+    document.getElementById('nekoheaderid').style.color = "#FF006E";
+    document.getElementById('versionid').style.color = "#CC0058";
+    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E" };
+    if (document.querySelectorAll("div.container_content__Z3nYC")[0]) { document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#E7E5E4' };
 }
 ///  Toggle cursor label visibility.
 function cursorLabel(bool) {
@@ -884,11 +948,19 @@ function mapBg(bool) {
                 if (document.getElementById(`WATER`)) {
                     document.getElementById(`WATER`).style.fill = "none";
                 }
-            }
-            else {
-                if (document.getElementById(`WATER`)) {
-                    document.getElementById(`WATER`).style.fill = "none";
+                if (document.getElementById(`BACKGROUND`)) {
+                    document.getElementById(`BACKGROUND`).style.fill = "none";
                 }
+                if (document.getElementById(`WATER_1_`)) {
+                    document.getElementById(`WATER_1_`).style.fill = "none";
+                }
+                if (document.getElementById(`WATER_2_`)) {
+                    document.getElementById(`WATER_2_`).style.fill = "none";
+                }
+                if (document.getElementById(`WATER_3_`)) {
+                    document.getElementById(`WATER_3_`).style.fill = "none";
+                }
+                
             }
         });
     }
@@ -896,7 +968,18 @@ function mapBg(bool) {
         if (document.getElementById(`WATER`)) {
             document.getElementById(`WATER`).style.fill = "#a4d1dc";
         }
-
+        if (document.getElementById(`BACKGROUND`)) {
+            document.getElementById(`BACKGROUND`).style.fill = "#a4d1dc";
+        }
+        if (document.getElementById(`WATER_1_`)) {
+            document.getElementById(`WATER_1_`).style.fill = "#a4d1dc";
+        }
+        if (document.getElementById(`WATER_2_`)) {
+            document.getElementById(`WATER_2_`).style.fill = "#a4d1dc";
+        }
+        if (document.getElementById(`WATER_3_`)) {
+            document.getElementById(`WATER_3_`).style.fill = "#a4d1dc";
+        }
     }
 }
 
@@ -952,9 +1035,11 @@ var src = true;
 var toggled = false;
 var eventListenersAdded = false;
 
+var refreshRate = 100;
+
 /// setSettings => remFooter => meow
 createForm();
 setSettings();
 
-setInterval(setSettings, 500);
-setInterval(ApplyColors, 50);
+setInterval(setSettings, refreshRate);
+setInterval(ApplyColors, refreshRate);
