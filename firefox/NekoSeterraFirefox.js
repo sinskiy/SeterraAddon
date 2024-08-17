@@ -87,7 +87,7 @@ function createForm() {
         nekoMain.appendChild(version);
 
         const changelog = document.createElement("a");
-        changelog.href = "";
+        changelog.href = "https://github.com/NekoXIII/SeterraAddon/blob/main/changelog.md#185";
         changelog.textContent = "Changelog";
         changelog.style.fontSize = "12px";
         changelog.style.position = "absolute";
