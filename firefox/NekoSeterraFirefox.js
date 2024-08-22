@@ -93,7 +93,7 @@ function createForm() {
         changelog.style.fontSize = "12px";
         changelog.style.position = "absolute";
         changelog.style.left = "5px";
-        changelog.style.marginTop = "15px";
+        changelog.style.marginTop = "35px";
         changelog.id = 'changelogid';
         changelog.target = "_blank";
         nekoMain.appendChild(changelog);
@@ -729,9 +729,6 @@ function useOldFont(bool){
             }
         });
     }
-
-
-
 }
 
 function handleCheckboxChange(checkboxId, storageKey, callback, reload = false) {
