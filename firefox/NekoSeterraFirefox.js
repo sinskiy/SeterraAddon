@@ -28,7 +28,8 @@ function createForm() {
             { id: 'showFlagCbxId', text: 'Show area flags', title: 'Shows or hides area flags.' },
             { id: 'showNamesCbxId', text: 'Show area names', title: 'Shows or hides area names.' },
             { id: 'remClickOnCbxId', text: 'Remove \"Click on\" text', title: 'Remove \"Click on\" text from cursor label' },
-            { id: 'moveCbxId', text: 'Move extension down', title: 'Moves the extension (and top 10 if applicable) downwards so it doesn\'t overlap with the map.' }
+            { id: 'moveCbxId', text: 'Move extension down', title: 'Moves the extension (and top 10 if applicable) downwards so it doesn\'t overlap with the map.' },
+            { id: 'oldFontCbxId', text: 'Use old font', title: 'Replaces all™ text with the old font.' }
         ];
 
         // Create a style element
@@ -79,7 +80,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.5 - 17th of August 2024 (Firefox)";
+        version.textContent = "v1.8.5.1 (hotfix) - 23rd of August 2024 (Firefox)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -87,7 +88,7 @@ function createForm() {
         nekoMain.appendChild(version);
 
         const changelog = document.createElement("a");
-        changelog.href = "https://github.com/NekoXIII/SeterraAddon/blob/main/changelog.md#185";
+        changelog.href = "https://github.com/NekoXIII/SeterraAddon/blob/main/changelog.md#1851";
         changelog.textContent = "Changelog";
         changelog.style.fontSize = "12px";
         changelog.style.position = "absolute";
@@ -104,37 +105,6 @@ function createForm() {
 function customTable(bool) {
     if (bool) {
         if (document.getElementsByClassName("highscore_table__oKrYg")[0]) {
-            // Check if an element with the text "Visit SRC Page" already exists
-            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                .find(a => a.textContent === "Visit SRC Page");
-
-            if (!existingSrcLink) {
-                var srcLink = document.createElement('a');
-                srcLink.textContent = "Visit SRC Page";
-                srcLink.style.position = "absolute";
-                srcLink.style.backgroundColor = "unset";
-                getData("moveEx").then(beans54678 => {
-                    if (beans54678) {
-                        srcLink.style.top = 996 + 40 + "px";
-                    }
-                });
-                srcLink.style.left = "23px";
-                srcLink.style.color = "#FF006E";
-                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcLink);
-                var srcApiDisclaimer = document.createElement('p');
-                srcApiDisclaimer.style.position = "absolute";
-                srcApiDisclaimer.style.backgroundColor = "unset";
-                getData("moveEx").then(beans54678 => {
-                    if (beans54678) {
-                        srcApiDisclaimer.style.top = 1016 + 40 + "px";
-                    }
-                });
-                srcApiDisclaimer.style.left = "23px";
-                srcApiDisclaimer.style.color = "red";
-                srcApiDisclaimer.style.fontSize = "11px";
-                srcApiDisclaimer.textContent = "* API is not 100% reliable, ranking might be slightly off.";
-                document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.appendChild(srcApiDisclaimer);
-            }
 
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.position = "absolute";
             document.getElementsByClassName("highscore_heading__mqofP")[0].style.backgroundColor = "unset";
@@ -629,6 +599,16 @@ function meow() {
             moveExtension(false);
         }
     });
+    getData("useOldFont").then(beans9241 => {
+        if (beans9241) {
+            document.getElementById("oldFontCbxId").checked = true;
+            useOldFont(true);
+        }
+        else {
+            document.getElementById("oldFontCbxId").checked = false;
+            useOldFont(false);
+        }
+    });
     if (src && !toggled) {
         toggled = true;
         setInterval(compareBestTime, 2000);
@@ -674,6 +654,7 @@ function setSettings() {
         handleCheckboxChange("showNamesCbxId", "showNames", names);
         handleCheckboxChange("remClickOnCbxId", "removeClickOn", remClickOn);
         handleCheckboxChange("moveCbxId", "moveEx", moveExtension);
+        handleCheckboxChange("oldFontCbxId", "useOldFont", useOldFont);
 
         eventListenersAdded = true;
     }
@@ -687,36 +668,16 @@ function moveExtension(bool) {
         getData("showTop10").then(beans5467 => {
             if (beans5467) {
                 // move top 10 down
-                // Check if an element with the text "Visit SRC Page" already exists
                 if (document.getElementsByClassName("highscore_heading__mqofP")[0]) {
-                    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                        .find(a => a.textContent === "Visit SRC Page");
-
-                    if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
-
-                    var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-                        .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
-                    if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
-
-                    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = 748 + 800 + "px" };
-                    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = 764 + 800 + "px" };
+                    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = 808 + 800 + "px" };
+                    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = 824 + 800 + "px" };
                 }
 
             }
             else {
-                // Check if an element with the text "Visit SRC Page" already exists
                 if (document.getElementsByClassName("highscore_heading__mqofP")[0]) {
-                    var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                        .find(a => a.textContent === "Visit SRC Page");
-
-                    if (existingSrcLink) { existingSrcLink.style.top = 996 + 845 + "px" };
-
-                    var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-                        .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
-                    if (apiDisc) { apiDisc.style.top = 1016 + 845 + "px" };
-
-                    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
-                    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+                    if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "808px" };
+                    if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "824px" };
                 }
 
             }
@@ -724,21 +685,53 @@ function moveExtension(bool) {
     }
     else {
         if (document.getElementsByClassName("highscore_heading__mqofP")[0]) {
-            var existingSrcLink = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('a'))
-                .find(a => a.textContent === "Visit SRC Page");
-
-            if (existingSrcLink) { existingSrcLink.style.top = 996 + 40 + "px" };
-
-            var apiDisc = Array.from(document.getElementsByClassName("highscore_heading__mqofP")[0].parentElement.getElementsByTagName('p'))
-                .find(p => p.textContent == "* API is not 100% reliable, ranking might be slightly off.");
-
-            if (apiDisc) { apiDisc.style.top = 1016 + 40 + "px" };
-
             document.getElementById("NekoAddon").style.top = "442px"
-            if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "748px" };
-            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "764px" };
+            if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.top = "808px" };
+            if (document.getElementsByClassName("highscore_table__oKrYg")[0]) { document.getElementsByClassName("highscore_table__oKrYg")[0].style.top = "824px" };
         }
     }
+}
+
+const oldFontstyle = document.createElement('style');
+oldFontstyle.type = 'text/css';
+
+const importRule = `
+@import url('https://fonts.cdnfonts.com/css/neo-sans-pro');
+`;
+
+if (oldFontstyle.styleSheet) {
+    oldFontstyle.styleSheet.cssText = importRule; // For IE8 and earlier
+} else {
+    oldFontstyle.appendChild(document.createTextNode(importRule));
+}
+
+document.head.appendChild(oldFontstyle);
+
+function useOldFont(bool){
+
+    var elements = document.querySelectorAll('*');
+
+    if (bool){
+        
+    
+        elements.forEach(function(element) {
+            var computedStyle = window.getComputedStyle(element);
+            if (element.textContent.trim() !== '' || computedStyle.content !== 'none') {
+                element.style.fontFamily = 'Neo Sans Pro, sans-serif';
+            }
+        });
+    }
+    else{
+        elements.forEach(function(element) {
+            var computedStyle = window.getComputedStyle(element);
+            if (element.textContent.trim() !== '' || computedStyle.content !== 'none') {
+                element.style.fontFamily = '__ggFont_3c514f';
+            }
+        });
+    }
+
+
+
 }
 
 function handleCheckboxChange(checkboxId, storageKey, callback, reload = false) {
@@ -770,6 +763,7 @@ setInitialData({
     "showNames": true,
     "removeClickOn": false,
     "moveEx": false,
+    "useOldFont": true,
     "initialReload": false
 }).then(() => {
     setSettings();
