@@ -80,7 +80,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.5.1 (hotfix) - 23rd of August 2024 (Firefox)";
+        version.textContent = "v1.8.5.2 - 12th of March 2025 (Firefox)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -88,7 +88,7 @@ function createForm() {
         nekoMain.appendChild(version);
 
         const changelog = document.createElement("a");
-        changelog.href = "https://github.com/NekoXIII/SeterraAddon/blob/main/changelog.md#1851";
+        changelog.href = "https://github.com/NekoXIII/SeterraAddon/blob/main/changelog.md#1852";
         changelog.textContent = "Changelog";
         changelog.style.fontSize = "12px";
         changelog.style.position = "absolute";
