@@ -1,5 +1,5 @@
 <div align=center>
-<h1> 
+<h1>
 Neko's Seterra Features Wizard
 </h1>
 <img src="./icon.png" width="18%">
@@ -7,6 +7,11 @@ Neko's Seterra Features Wizard
 <h3>
 Extension changelog
 </h3>
+<hr>
+<h3 id="19752">
+Version 1.8.5.2
+</h3>
+Improved algorithm of testing url for being a seterra map
 <hr>
 <h3 id="1851">
 Version 1.8.5.1 (hotfix)
