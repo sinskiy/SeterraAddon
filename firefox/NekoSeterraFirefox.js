@@ -256,7 +256,7 @@ function darkMode() {
 
     document.querySelectorAll(':not(a):not(input)').forEach(function (element) {
         element.style.color = 'white';
-    });    
+    });
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
         document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(24, 26, 27, 0.75)";
@@ -320,7 +320,7 @@ function lightMode() {
 
     document.querySelectorAll(':not(a):not(input)').forEach(function (element) {
         element.style.color = 'black';
-    });    
+    });
     if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
         document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0].style.background = "rgba(231, 229, 228, 0.75)";
@@ -475,7 +475,7 @@ function getData(name) {
 ///  Constant loop for page checks.
 function meow() {
 
-    if (window.location.pathname.substring(0, 4) == "/vgp") {
+    if (isSeterraMap(window.location.href)) {
         createForm();
         document.getElementById("NekoAddon").style.display = "block"
     }
@@ -623,6 +623,12 @@ function meow() {
         }
     });
 }
+
+const seterraUrlRegex = /https:\/\/www\.geoguessr\.com\/([a-zA-Z]{2}\/)?(vgp|fl)\/\d+/;
+function isSeterraMap(url) {
+    return seterraUrlRegex.test(url);
+}
+
 ///  Applies the user's stored settings. (executes functions)
 function setSettings() {
 
@@ -712,8 +718,8 @@ function useOldFont(bool){
     var elements = document.querySelectorAll('*');
 
     if (bool){
-        
-    
+
+
         elements.forEach(function(element) {
             var computedStyle = window.getComputedStyle(element);
             if (element.textContent.trim() !== '' || computedStyle.content !== 'none') {
@@ -942,7 +948,7 @@ function mapBg(bool) {
                 if (document.getElementById(`WATER_3_`)) {
                     document.getElementById(`WATER_3_`).style.fill = "none";
                 }
-                
+
             }
         });
     }
