@@ -8,6 +8,11 @@ Neko's Seterra Features Wizard
 Extension changelog
 </h3>
 <hr>
+<h3 id="1854">
+Version 1.8.5.4 (hotfix)
+</h3>
+Fixed some colors (modal and homepage progression) in dark and light mode
+<hr>
 <h3 id="19752">
 Version 1.8.5.2
 </h3>
