@@ -80,7 +80,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.5.2 - 12th of March 2025 (Chromium)";
+        version.textContent = "v1.8.5.4 - 16th of May 2025 (Chromium)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -280,9 +280,18 @@ function darkMode() {
     document.getElementById('versionid').style.color = "#CC0058";
     if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E" };
     if (document.querySelectorAll("div.container_content__Z3nYC")[0]) { document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#181A1B' };
-
-
-
+    // homepage progression colors
+    if (document.querySelectorAll("div.progression-banner-card-bar_title__OxvJn")) {
+        document.querySelectorAll("div.progression-banner-card-bar_title__OxvJn").forEach(function (element) {
+            element.style.color = "var(--seterra-color-link)"
+        })
+         document.querySelectorAll("div.progression-banner-card-bar_score__ws1hV span").forEach(function (element) {
+            element.style.color = "black"
+        })
+        document.querySelectorAll("div.progression-banner-card_title__xpkNo").forEach(function (element) {
+            element.style.color = "var(--seterra-color-orange)"
+        })
+    }
 }
 ///  Toggle for light mode.
 function lightMode() {
@@ -345,6 +354,22 @@ function lightMode() {
     document.getElementById('versionid').style.color = "#CC0058";
     if (document.getElementsByClassName("highscore_heading__mqofP")[0]) { document.getElementsByClassName("highscore_heading__mqofP")[0].style.color = "#FF006E" };
     if (document.querySelectorAll("div.container_content__Z3nYC")[0]) { document.querySelectorAll("div.container_content__Z3nYC")[0].style.backgroundColor = '#E7E5E4' };
+    // homepage progression colors
+    if (document.querySelectorAll("div.progression-banner-card-bar_title__OxvJn")) {
+        document.querySelectorAll("div.progression-banner-card-bar_title__OxvJn").forEach(function (element) {
+            element.style.color = "var(--seterra-color-link)"
+        })
+         document.querySelectorAll("div.progression-banner-card-bar_score__ws1hV span").forEach(function (element) {
+            element.style.color = "black"
+        })
+        document.querySelectorAll("div.progression-banner-card_title__xpkNo").forEach(function (element) {
+            element.style.color = "var(--seterra-color-orange)"
+        })
+        document.querySelectorAll("div.switch_show__V6W5T + label.switch_label__KrnMF").forEach(function (element) {
+            element.style.color = "white"
+        })
+    }
+    if (document.querySelector("div.score-modal_progressionTitle__D34Xw")) { document.querySelector("div.score-modal_progressionTitle__D34Xw").style.color = "white" }
 }
 ///  Toggle cursor label visibility.
 function cursorLabel(bool) {
@@ -1003,11 +1028,11 @@ function ApplyColors() {
     if (document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0]) {
         document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0].style.boxShadow = "none"
     }
-    if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
+    if (document.querySelectorAll('div[data-qa="score-modal"]')[0]) {
         getData("darkMode").then(beans0 => {
             if (beans0) {
                 // end screen \/
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(24, 26, 27, 0.55)";
+                document.querySelectorAll('div[data-qa="score-modal"]')[0].style.background = "rgba(24, 26, 27, 0.55)";
                 // cursor label \/
                 if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
@@ -1023,7 +1048,7 @@ function ApplyColors() {
             }
             else {
                 // end screen \/
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(255, 255, 255, 0.55)";
+                document.querySelectorAll('div[data-qa="score-modal"]')[0].style.background = "rgba(255, 255, 255, 0.55)";
                 // cursor label \/
                 if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
