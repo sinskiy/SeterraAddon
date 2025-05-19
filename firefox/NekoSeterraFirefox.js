@@ -80,7 +80,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.5.4 - 16th of May 2025 (Firefox)";
+        version.textContent = "v1.8.5.5 - 19th of May 2025 (Firefox)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
@@ -1003,11 +1003,11 @@ function ApplyColors() {
     if (document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0]) {
         document.getElementsByClassName("game-page_gameAreaWrapper__Faj76")[0].style.boxShadow = "none"
     }
-    if (document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0]) {
+    if (document.querySelectorAll('div[data-qa="score-modal"]')[0]) {
         getData("darkMode").then(beans0 => {
             if (beans0) {
                 // end screen \/
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(24, 26, 27, 0.55)";
+                document.querySelectorAll('div[data-qa="score-modal"]')[0].style.background = "rgba(24, 26, 27, 0.55)";
                 // cursor label \/
                 if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
@@ -1023,7 +1023,7 @@ function ApplyColors() {
             }
             else {
                 // end screen \/
-                document.querySelectorAll('div.modal_content__ZijTp.modal_colorWhite__b1Uem.modal_sizeSmall__gHON2')[0].style.background = "rgba(255, 255, 255, 0.55)";
+                document.querySelectorAll('div[data-qa="score-modal"]')[0].style.background = "rgba(255, 255, 255, 0.55)";
                 // cursor label \/
                 if (document.getElementsByClassName('game-tooltip_tooltip__w_58_')[0]) {
 
