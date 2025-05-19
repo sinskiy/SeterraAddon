@@ -80,7 +80,7 @@ function createForm() {
         });
 
         const version = document.createElement("p");
-        version.textContent = "v1.8.5.4 - 16th of May 2025 (Firefox)";
+        version.textContent = "v1.8.5.5 - 19th of May 2025 (Firefox)";
         version.style.fontSize = "12px";
         version.style.position = "absolute";
         version.style.left = "5px";
