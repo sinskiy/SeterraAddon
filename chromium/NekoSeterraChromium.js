@@ -1,3 +1,8 @@
+// Things you might want change
+// 0 = sound every time you restart, 1000 = echo, 1500 = slight echo, ~2700 = no echo 
+const UNMUTE_AFTER_MS_LONG = 1000;
+const UNMUTE_AFTER_MS_SHORT = 300;
+
 ///  Form creation for user settings.
 function createForm() {
     if (!document.getElementById("NekoAddon")) {
@@ -199,16 +204,57 @@ function noLeftSpace(bool) {
 }
 
 ///  Map reset function.
+let unmuteTimeoutId
 function spaceKeyDownHandler(event) {
-    if (event.code == "Space") {
-        event.preventDefault();
-        if (document.querySelectorAll('button.button_button__aR6_e.button_variantPrimary__u3WzI')[0]) {
-            document.querySelectorAll('button.button_button__aR6_e.button_variantPrimary__u3WzI')[0].click();
+  if (event.code == "Space") {
+      event.preventDefault();
+      clearTimeout(unmuteTimeoutId);
+      const quitButton = document.querySelector(".game-header_quitGameButton__zTYUz");
+      if (quitButton) {
+        quitButton.click();
+      }
+      // prevent "game end" sound
+      const correctAnswersPercentage = document.querySelector(".game-header_left__Psq9Q label:nth-of-type(2)");
+      const unmuteAfterMs = (correctAnswersPercentage && correctAnswersPercentage.textContent === "100%") ? UNMUTE_AFTER_MS_LONG : UNMUTE_AFTER_MS_SHORT;
+      tryStartGame(unmuteAfterMs);
+  }
+}
+const OVERLAY_CLASS = "game-overlay_wrapper__egT_7";
+function tryStartGame(unmuteAfterMs) {
+  const overlay = document.querySelector(".".concat(OVERLAY_CLASS));
+  if (overlay) {
+    // already available, no need to wait
+    handleStartGame(overlay);
+  } else {
+    chrome.runtime.sendMessage({ action: "muteTab" });
+    // wait for start button to appear
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node.classList.contains(OVERLAY_CLASS)) {
+            handleStartGame(node, observer, unmuteAfterMs);
+          }
         }
-        else {
-            document.querySelectorAll("button.button_button__aR6_e.button_variantSecondaryInverted__6G2ex.button_sizeSmall__MB_qj")[1].click();
-        }
+      }
+    });
+    const gameWrapper = document.querySelector(".game-area_gameWrapper__QWih6");
+    // const startButton = document.querySelector('[data-qa="start-quiz-button"]');
+    observer.observe(gameWrapper, { subtree: true, childList: true });
+  }
+}
+function handleStartGame(overlay, observer, unmuteAfterMs) {
+  clearTimeout(unmuteTimeoutId);
+  overlay.style.display = "none";
+  const startButton = document.querySelector('[data-qa="start-quiz-button"]');
+  if (startButton) {
+    startButton.click();
+    if (observer) {
+      observer.disconnect();
     }
+    unmuteTimeoutId = setTimeout(() => {
+      chrome.runtime.sendMessage({ action: "unmuteTab" });
+    }, unmuteAfterMs)
+  }
 }
 ///  Map reset check.
 function mapReset(bool) {
