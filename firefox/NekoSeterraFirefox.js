@@ -203,6 +203,7 @@ function noLeftSpace(bool) {
 
 }
 
+///  Map reset function.
 let unmuteTimeoutId
 function spaceKeyDownHandler(event) {
   if (event.code == "Space") {
@@ -215,7 +216,6 @@ function spaceKeyDownHandler(event) {
       // prevent "game end" sound
       const correctAnswersPercentage = document.querySelector(".game-header_left__Psq9Q label:nth-of-type(2)");
       const unmuteAfterMs = (correctAnswersPercentage && correctAnswersPercentage.textContent === "100%") ? UNMUTE_AFTER_MS_LONG : UNMUTE_AFTER_MS_SHORT;
-      console.log(unmuteAfterMs, correctAnswersPercentage)
       tryStartGame(unmuteAfterMs);
   }
 }
