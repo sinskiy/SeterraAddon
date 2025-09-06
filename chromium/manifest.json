@@ -2,12 +2,16 @@
   "manifest_version": 3,
   "name": "Neko's Settera Features Wizard",
   "description": "Adds Neko's Settera addons to all https://www.geoguessr.com/vgp/ pages.",
-  "version": "1.8.5.4",
+  "version": "1.8.6",
   "permissions": [
-    "storage"
+    "storage",
+    "tabs"
   ],
   "icons": {
     "512": "icons/seterra.png"
+  },
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {

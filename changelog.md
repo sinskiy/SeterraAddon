@@ -8,6 +8,11 @@ Neko's Seterra Features Wizard
 Extension changelog
 </h3>
 <hr>
+<h3 id="186">
+Version 1.8.6
+</h3>
+Updated quick restart algorithm due to UI changes, added tab mute while restart to prevent sound
+<hr>
 <h3 id="1854">
 Version 1.8.5.4 (hotfix)
 </h3>
